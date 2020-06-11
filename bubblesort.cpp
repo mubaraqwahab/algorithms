@@ -5,11 +5,10 @@ using namespace std;
 
 template<typename T>
 void bubblesort(T* A, size_t n) {
-  int swaps, k = 0;
+  int swaps;
   for (int i = 0; i < n-1; i++) {
     swaps = 0;
     for (int j = 0; j < n-1; j++) {
-      k++;
       if (A[j] > A[j+1]) {
         swap(A[j], A[j+1]);
         swaps++;
@@ -17,7 +16,6 @@ void bubblesort(T* A, size_t n) {
     }
     if (swaps == 0) break;
   }
-  cout << k << endl;
 }
 
 //
