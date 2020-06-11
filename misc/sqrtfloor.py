@@ -16,8 +16,9 @@ if __name__ == '__main__':
   def test(n):
     return floor(sqrt(n))
 
+  health = True
   for i in range(1, 10001):
-    health = sqrt_floor(i) == test(i)
+    health = health and sqrt_floor(i) == test(i)
 
   if health:
     print("Alhamdulillah, all's well")
