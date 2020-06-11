@@ -1,5 +1,3 @@
-from math import sqrt, floor
-
 def sqrt_floor(n):
   """Return the floor of the square root of a positive integer n."""
 
@@ -12,6 +10,8 @@ def sqrt_floor(n):
 
 # Test drive
 if __name__ == '__main__':
+  from math import sqrt, floor
+
   # Test function
   def test(n):
     return floor(sqrt(n))
