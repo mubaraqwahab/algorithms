@@ -1,3 +1,5 @@
 *.o
 .vscode
 *.out
+package.json
+*.js

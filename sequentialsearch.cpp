@@ -18,10 +18,16 @@ int main() {
   #define N 7
   int array[] = { 89,45,68,90,29,34,17 };
   int key = 90;
+  int position = sequentialsearch(array, N, 90);
 
-  cout << key << " is in ";
-  print_array(array, N);
-  cout << " at position " << sequentialsearch(array, N, 90) << endl;
+  if (position != -1) {
+    cout << key << " is in ";
+    print_array(array, N);
+    cout << " at position " << position << endl;
+  } else {
+    cout << key << " is not in ";
+    print_array(array, N, true);
+  }
 
   return 0;
 }
