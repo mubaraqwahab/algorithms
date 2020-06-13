@@ -4,12 +4,10 @@
  */
 export function mergesort(array) {
   const n = array.length;
-  const fl = Math.floor,
-    ce = Math.ceil;
 
   if (array.length > 1) {
-    const half1 = array.slice(0, fl(n / 2));
-    const half2 = array.slice(fl(n / 2));
+    const half1 = array.slice(0, Math.floor(n / 2));
+    const half2 = array.slice(Math.floor(n / 2));
 
     mergesort(half1);
     mergesort(half2);
@@ -43,14 +41,12 @@ function merge(arrIn1, arrIn2, arrOut) {
   }
 
   if (i < p) {
-    for (let m = i; m < p; m++) {
+    for (let m = i; m < p; m++, k++) {
       arrOut[k] = arrIn1[m];
-      k++;
     }
   } else {
-    for (let m = i; m < q; m++) {
+    for (let m = i; m < q; m++, k++) {
       arrOut[k] = arrIn2[m];
-      k++;
     }
   }
 }

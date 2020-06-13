@@ -2,7 +2,7 @@ import { selectionSort } from "./selectionsort.js";
 import { bubbleSort } from "./bubblesort.js";
 import { mergesort } from "./mergesort.js";
 
-let arr = [89, 45, 68, 90, 29, 34, 17];
+let arr = [89, 68, 45, 90, 29, 34, 17];
 
 console.log(`Before: ${arr}`);
 
