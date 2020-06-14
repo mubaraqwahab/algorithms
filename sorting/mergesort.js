@@ -1,7 +1,7 @@
 /**
  * Sort an array by mergesort.
  * @param {array} array - An array to sort.
- * @param {comparefn} compare - A comparison function.
+ * @param {function(T,T): number} compare - A comparison function.
  * When called with any two values `a` and `b` of an array,
  * if it returns a positive number, then `b` precedes `a` in the sorted array.
  * Otherwise `a` precedes `b`.
@@ -21,11 +21,11 @@ export function mergesort(array, compare) {
 }
 
 /**
- * Merge two sorted arrays into a third sorted array
+ * Merge two sorted arrays into a third sorted array.
  * @param {array} arrIn1 - a sorted array
  * @param {array} arrIn2 - another sorted array
  * @param {array} arrOut - an array to merge arrIn1 and arrIn2 into.
- * @param {comparefn} compare - A comparison function.
+ * @param {function(T,T): number} compare - A comparison function.
  */
 function merge(arrIn1, arrIn2, arrOut, compare) {
   let i = 0,
@@ -55,10 +55,3 @@ function merge(arrIn1, arrIn2, arrOut, compare) {
     }
   }
 }
-
-/**
- * @callback comparefn
- * @param a
- * @param b
- * @returns {number}
- */

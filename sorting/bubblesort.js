@@ -1,7 +1,7 @@
 /**
  * Sort an array by bubble sort.
  * @param {array} array - An array to sort.
- * @param {comparefn} compare - A comparison function.
+ * @param {function(T,T): number} compare - A comparison function.
  * When called with any two values `a` and `b` of an array,
  * if it returns a positive number, then `b` precedes `a` in the sorted array.
  * Otherwise `a` precedes `b`.
@@ -20,10 +20,3 @@ export function bubbleSort(array, compare) {
     if (swaps === 0) break;
   }
 }
-
-/**
- * @callback comparefn
- * @param a
- * @param b
- * @returns {number}
- */

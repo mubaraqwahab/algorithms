@@ -3,7 +3,7 @@
  * that satisfies `predicate` using sequential search.
  * Return -1 if no element satisfies `predicate`.
  * @param {array} array - an array to search.
- * @param {function(*): boolean} predicate - a predicate function.
+ * @param {function(T): boolean} predicate - a predicate function.
  * When called on an element, if it returns a truthy value, then the search succeeds.
  * @param {number} [start=] - an index of `array` to start searching from. Defaults to 0.
  * @param {number} [stop=] - an index of `array` to stop at.
