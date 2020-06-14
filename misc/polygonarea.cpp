@@ -49,26 +49,12 @@ int main() {
 
 double green(vector V[], int n) {
   double area = 0;
-  for (int i = 0, j; i < n; i++) {
-    j = (i+1) % n;
-    area += (V[j].x + V[i].x) * (V[j].y - V[i].y);
-  }
-  area /= 2;
+  // TODO
   return area;
 }
 
 double crossproduct(vector V[], int n) {
-  double area = 0, L;
-  vector v0, u1, u2;
-  v0 = V[0];
-  // Careful! This wouldn't work before C++11
-  u1 = { V[1].x - v0.x, V[1].y - v0.y };
-  for (int i = 1; i < n-1; i++) {
-    u2 = { V[i+1].x - v0.x, V[i+1].y - v0.y };
-    L = abs(u1.x*u2.y - u1.y*u2.x);
-    area += L;
-    u1 = u2;
-  }
-  area /= 2;
+  double area = 0;
+  // TODO
   return area;
 }
