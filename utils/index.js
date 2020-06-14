@@ -15,6 +15,7 @@ const smallest = min(min(objs[0], objs[1], key), objs[2], key);
 const largest = max(max(objs[0], objs[1], key), objs[2], key);
 const median = medianOfThree(...objs, key);
 
+console.log("Given", objs, "and comparing by y property");
 console.log("min is", smallest);
 console.log("max is", largest);
 console.log("median is", median);
