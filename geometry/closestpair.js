@@ -1,4 +1,4 @@
-import { min } from "../utils.js";
+import { min } from "../utils/utils.js";
 
 /**
  * Find the distance between the closest pair of Cartesian points (x,y) in `points` by brute force.
