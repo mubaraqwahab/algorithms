@@ -1,6 +1,6 @@
 /**
  * Sort an array by selection sort.
- * @param {Array} array - An array to sort.
+ * @param {array} array - An array to sort.
  * @param {comparefn} compare - A comparison function.
  * When called with any two values `a` and `b` of an array,
  * if it returns a positive number, then `b` precedes `a` in the sorted array.

@@ -1,6 +1,6 @@
 /**
  * Sort an array by mergesort.
- * @param {Array} array - An array to sort.
+ * @param {array} array - An array to sort.
  * @param {comparefn} compare - A comparison function.
  * When called with any two values `a` and `b` of an array,
  * if it returns a positive number, then `b` precedes `a` in the sorted array.
@@ -22,9 +22,9 @@ export function mergesort(array, compare) {
 
 /**
  * Merge two sorted arrays into a third sorted array
- * @param {Array} arrIn1 - a sorted array
- * @param {Array} arrIn2 - another sorted array
- * @param {Array} arrOut - an array to merge arrIn1 and arrIn2 into.
+ * @param {array} arrIn1 - a sorted array
+ * @param {array} arrIn2 - another sorted array
+ * @param {array} arrOut - an array to merge arrIn1 and arrIn2 into.
  * @param {comparefn} compare - A comparison function.
  */
 function merge(arrIn1, arrIn2, arrOut, compare) {
