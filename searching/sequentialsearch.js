@@ -5,8 +5,8 @@
  * @param {array} array - an array to search.
  * @param {function(T): boolean} predicate - a predicate function.
  * When called on an element, if it returns a truthy value, then the search succeeds.
- * @param {number} [start=] - an index of `array` to start searching from. Defaults to 0.
- * @param {number} [stop=] - an index of `array` to stop at.
+ * @param {number} [start] - an index of `array` to start searching from. Defaults to 0.
+ * @param {number} [stop] - an index of `array` to stop at.
  * The element at this position is not searched. Defaults to the length of `array`.
  */
 export function sequentialSearch(
