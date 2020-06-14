@@ -6,9 +6,11 @@ let arr = [89, 68, 45, 90, 29, 34, 17];
 
 console.log(`Before: ${arr}`);
 
-// selectionSort(arr);
-// bubbleSort(arr);
-mergesort(arr);
+const compareNum = (a, b) => a - b;
+
+// selectionSort(arr, compareNum);
+// bubbleSort(arr, compareNum);
+mergesort(arr, compareNum);
 
 console.log(`After: ${arr}`);
 
