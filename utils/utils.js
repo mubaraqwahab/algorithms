@@ -28,5 +28,20 @@ export function max(a, b, key = (n) => n) {
  * @param {function(*): *} [key] a one-argument ordering function. (See https://docs.python.org/3/library/stdtypes.html#list.sort)
  */
 export function medianOfThree(a, b, c, key = (n) => n) {
-  return max(min(a, b, key), c, key);
+  const p = key(a),
+    q = key(b),
+    r = key(c);
+  if (p < q) {
+    if (q < r) return b;
+    else if (p < r) return c;
+    else return a;
+  } else {
+    if (p < r) return a;
+    else if (q < r) return c;
+    else return b;
+  }
+  // OR
+  // return min(max(a, b, key), max(min(a, b, key), c, key), key);
+
+  // See https://stackoverflow.com/q/1582356/12695621
 }
