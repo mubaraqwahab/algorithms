@@ -1,3 +1,3 @@
 # Algorithms
 
-A repository of implementations of algorithms I learn.
+A repository of implementations of common algorithms I learn.
