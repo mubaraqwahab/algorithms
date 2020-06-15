@@ -37,7 +37,7 @@ int main()
   double tol = 1e-4;
   int max_iter = 20;
 
-  cout << "Solve x^4 + x^3 - 7x^2 - 5x + 10 = 0 on (2,3) correct to within 1e-4 using Newton-Raphson method:" << endl;
+  cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using Newton-Raphson method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
        << newtonraphson(f, g, z0, tol, max_iter) << endl;
 }
