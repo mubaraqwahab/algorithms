@@ -1,5 +1,5 @@
 fixedpoint:
-	g++ fixedpoint.cpp -o fixedpoint.out
+	g++ -Wall fixedpoint.cpp -o fixedpoint.out
 
 .PHONY: clean
 clean:
