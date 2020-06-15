@@ -50,5 +50,5 @@ double fixedpoint(double g(double), double p0, double tol, double max_iter)
   } while (i < max_iter && error > tol);
 
   // Why does the error get printed without the return statement?
-  // return p;
+  return p;
 }
