@@ -2,8 +2,9 @@
 
 using namespace std;
 
-struct vector {
-  double x,y;
+struct vector
+{
+  double x, y;
 };
 
 /**
@@ -31,14 +32,15 @@ double green(vector V[], int n);
 double crossproduct(vector V[], int n);
 
 // Test drive
-int main() {
-  #define N 5
-  vector v1 = {0,3};
-  vector v2 = {3,0};
-  vector v3 = {5,1};
-  vector v4 = {4,4};
-  vector v5 = {1,5};
-  vector V[N] = { v1, v2, v3, v4, v5 };
+int main()
+{
+#define N 5
+  vector v1 = {0, 3};
+  vector v2 = {3, 0};
+  vector v3 = {5, 1};
+  vector v4 = {4, 4};
+  vector v5 = {1, 5};
+  vector V[N] = {v1, v2, v3, v4, v5};
 
   cout << "Polygon Area" << endl;
   cout << "Green's theorem: " << green(V, N) << endl;
@@ -47,13 +49,15 @@ int main() {
   return 0;
 }
 
-double green(vector V[], int n) {
+double green(vector V[], int n)
+{
   double area = 0;
   // TODO
   return area;
 }
 
-double crossproduct(vector V[], int n) {
+double crossproduct(vector V[], int n)
+{
   double area = 0;
   // TODO
   return area;
