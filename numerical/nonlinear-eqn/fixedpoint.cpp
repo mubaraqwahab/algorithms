@@ -42,4 +42,7 @@ double fixedpoint(double g(double), double p0, double tol, double max_iter) {
 
     p0 = p;
   } while (i < max_iter && error > tol);
+
+  // Why does the result get printed without the return statement?
+  return p;
 }
