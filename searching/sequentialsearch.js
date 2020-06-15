@@ -1,22 +1,18 @@
 /**
- * Find the position of the first element in `array` from `start` position to `stop`
- * that satisfies `predicate` using sequential search.
- * Return -1 if no element satisfies `predicate`.
+ * Find the position of the first element in `array`
+ * that matches `searchKey` using sequential search.
+ * Return -1 if no such element is found.
+ *
  * @param {array} array - an array to search.
- * @param {function(T): boolean} predicate - a predicate function.
- * When called on an element, if it returns a truthy value, then the search succeeds.
- * @param {number} [start] - an index of `array` to start searching from. Defaults to 0.
- * @param {number} [stop] - an index of `array` to stop at.
- * The element at this position is not searched. Defaults to the length of `array`.
+ * @param {*} searchKey - the item to search for.
+ * @param {function(T): T} compareKey - a function. It is called on elements of the array
+ * (and on `searchKey`) once and should return the key by which the element is compared.
+ * Ignore this if you just want to compare by actual values.
  */
-export function sequentialSearch(
-  array,
-  predicate,
-  start = 0,
-  stop = array.length
-) {
-  for (let i = start; i < stop; i++) {
-    if (predicate(array[i])) {
+export function sequentialSearch(array, searchKey, compareKey = (e) => e) {
+  const search = compareKey(searchKey);
+  for (let i = 0; i < array.length; i++) {
+    if (compareKey(array[i]) === search) {
       return i;
     }
   }

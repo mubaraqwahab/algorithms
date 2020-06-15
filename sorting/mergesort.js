@@ -9,7 +9,7 @@
 export function mergesort(array, compare) {
   const n = array.length;
 
-  if (array.length > 1) {
+  if (n > 1) {
     const half1 = array.slice(0, Math.floor(n / 2));
     const half2 = array.slice(Math.floor(n / 2));
 
@@ -50,7 +50,7 @@ function merge(arrIn1, arrIn2, arrOut, compare) {
       arrOut[k] = arrIn1[m];
     }
   } else {
-    for (let m = i; m < q; m++, k++) {
+    for (let m = j; m < q; m++, k++) {
       arrOut[k] = arrIn2[m];
     }
   }
