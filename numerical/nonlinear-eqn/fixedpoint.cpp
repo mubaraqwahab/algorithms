@@ -8,10 +8,10 @@ using namespace std;
  * Solve, using fixed-point iteration, x=g(x) on some interval [a,b].
  *
  * Params:
- * - The function g(x) that satisfies the Fixed-Point Theorem on [a,b],
+ * - A function g(x) that satisfies the Fixed-Point Theorem on [a,b],
  * - An initial approximation p0 (p0 in [a,b]) to the fixed point of g(x),
- * - An error tolerance, tol
- * - The maximum number of iterations allowed.
+ * - An error tolerance, tol,
+ * - max_iter, the maximum number of iterations allowed.
  *
  * Ouput: An approximation to the solution to x=g(x).
  */
@@ -37,7 +37,8 @@ int main()
 
 double fixedpoint(double g(double), double p0, double tol, double max_iter)
 {
-  double p, error, i = 1;
+  double p, error;
+  int i = 1;
 
   do
   {
