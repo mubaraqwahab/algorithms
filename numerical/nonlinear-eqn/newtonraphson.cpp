@@ -14,7 +14,7 @@ using namespace std;
  * - An error tolerance, tol,
  * - max_iter, the maximum number of iterations allowed.
  *
- * Ouput: An approximation to the solution to x=g(x).
+ * Ouput: An approximation to the root of f(x)=0.
  */
 double newtonraphson(double f(double), double g(double), double z0, double tol, int max_iter);
 
