@@ -43,12 +43,11 @@ double fixedpoint(double g(double), double p0, double tol, double max_iter)
   {
     p = g(p0);
 
-    error = std::abs(p - p0);
+    error = abs(p - p0);
     i++;
 
     p0 = p;
   } while (i < max_iter && error > tol);
 
-  // Why does the error get printed without the return statement?
   return p;
 }
