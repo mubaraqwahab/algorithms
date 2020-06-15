@@ -5,7 +5,7 @@
  *
  * @param {array} array - an array to search.
  * @param {*} searchKey - the item to search for.
- * @param {function(T): T} compareKey - `compareKey` is called on elements of the array
+ * @param {function(T): T} [compareKey] - `compareKey` is called on elements of the array
  * at most once and should return the key by which the element is compared with `searchKey`.
  * Ignore this if you just want to compare by actual values.
  */
