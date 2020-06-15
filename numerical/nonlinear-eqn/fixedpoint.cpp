@@ -21,6 +21,7 @@ double fixedpoint(double g(double), double p0, double tol, double max_iter);
 double g(double x) { return pow(3*x*x + 3, 0.25); }
 
 int main() {
+  // Test
   double p0 = 1;
   double tol = 1e-2;
   int max_iter = 20;
