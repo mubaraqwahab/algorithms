@@ -38,7 +38,7 @@ int main()
 double fixedpoint(double g(double), double p0, double tol, double max_iter)
 {
   double p, error;
-  int i = 1;
+  int i = 0;
 
   do
   {

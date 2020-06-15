@@ -45,7 +45,7 @@ int main()
 double newtonraphson(double f(double), double g(double), double z0, double tol, int max_iter)
 {
   double z, error;
-  int i = 1;
+  int i = 0;
 
   do
   {
