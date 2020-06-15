@@ -1,5 +1,5 @@
 polygonarea:
-	g++ polygonarea.cpp -o polygonarea.out
+	g++ -Wall polygonarea.cpp -o polygonarea.out
 
 .PHONY: clean
 clean:
