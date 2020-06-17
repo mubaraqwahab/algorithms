@@ -1,6 +1,9 @@
 import { selectionSort } from "./selectionsort.js";
 import { bubbleSort } from "./bubblesort.js";
 import { mergesort } from "./mergesort.js";
+import { quicksort } from "./quicksort.js";
+
+// TEST
 
 let arr = [89, 68, 45, 90, 29, 34, 17];
 
@@ -8,49 +11,67 @@ const compareNum = (a, b) => a - b;
 
 console.log(`Before: ${arr}`);
 
-// selectionSort(arr, compareNum);
-// bubbleSort(arr, compareNum);
+selectionSort(arr, compareNum);
+bubbleSort(arr, compareNum);
 mergesort(arr, compareNum);
+quicksort(arr, compareNum);
 
 console.log(`After: ${arr}`);
 
-// Prove stability
-// 89, 68, 45, 90, 29, 34, 17;
-// const arr = [
-//   { value: 23, pos: 1 },
-//   { value: 23, pos: 2 },
-//   { value: 89, pos: 1 },
-//   { value: 23, pos: 3 },
-//   { value: 89, pos: 2 },
-//   { value: 17, pos: 1 },
-//   { value: 34, pos: 1 },
-// ];
+/**/
 
-// mergesort(arr, (a, b) => a.value - b.value);
-// console.log(arr);
+/*/ STABILITY TEST
 
-// TIMING
+const arr = [
+  { value: 23, pos: 1 },
+  { value: 23, pos: 2 },
+  { value: 89, pos: 1 },
+  { value: 23, pos: 3 },
+  { value: 89, pos: 2 },
+  { value: 17, pos: 1 },
+  { value: 34, pos: 1 },
+];
 
-// let arr = [];
-// for (let i = 0; i < 100000; i++) {
-//   arr.push(Math.floor(Math.random() * 1000))
-// }
+const compareValues = (a, b) => a.value - b.value;
 
-// let arr2 = [ ...arr ];
-// let arr3 = [ ...arr ];
+// selectionSort(arr, compareValues);
+// bubbleSort(arr, compareValues);
+// mergesort(arr, compareValues);
+quicksort(arr, compareValues);
 
-// // console.log(`\nBefore: ${arr}\n`);
-// console.log("Start\n");
-// console.time("Selection sort")
-// selectionSort(arr, compareNum);
-// console.timeEnd("Selection sort")
+console.log(arr);
 
-// console.time("bubblesort")
-// bubbleSort(arr2, compareNum);
-// console.timeEnd("bubblesort")
+/**/
 
-// console.time("mergesort")
-// mergesort(arr3, compareNum);
-// console.timeEnd("mergesort")
+/*/ TIME TEST
 
-// // console.log(`\nAfter: ${arr}`);
+let arr = [];
+for (let i = 0; i < 100000; i++) {
+  arr.push(Math.floor(Math.random() * 1000));
+}
+
+let arr2 = [...arr];
+let arr3 = [...arr];
+let arr4 = [...arr];
+
+const compareNum = (a, b) => a - b;
+
+console.log("\nSTART TEST\n");
+
+console.time("Selection sort");
+selectionSort(arr, compareNum);
+console.timeEnd("Selection sort");
+
+console.time("bubblesort");
+bubbleSort(arr2, compareNum);
+console.timeEnd("bubblesort");
+
+console.time("mergesort");
+mergesort(arr3, compareNum);
+console.timeEnd("mergesort");
+
+console.time("quicksort");
+quicksort(arr4, compareNum);
+console.timeEnd("quicksort");
+
+/**/
