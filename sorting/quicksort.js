@@ -1,8 +1,4 @@
 /**
-
- */
-
-/**
  * Sort an array by quicksort.
  * @param {array} array - An array to sort.
  * @param {function(T,T): number} compare - A comparison function.
@@ -29,12 +25,13 @@ export function quicksort(array, compare, left = 0, right = array.length - 1) {
  */
 function partition(array, compare, left, right) {
   const pivot = array[left];
+
   let i = left,
     j = right + 1;
 
   do {
     do i++;
-    while (compare(array[i], pivot) < 0);
+    while (i < right && compare(array[i], pivot) < 0);
 
     do j--;
     while (compare(array[j], pivot) > 0);
