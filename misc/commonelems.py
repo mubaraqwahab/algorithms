@@ -35,13 +35,6 @@ if __name__ == '__main__':
     p.sort()
     q.sort()
 
-    print("p", p)
-    print("q", q)
-
-    print()
-    print(common_elements(p, q))
-    print(test(p, q))
-
     if common_elements(p, q) != test(p, q):
       health = False
       break
