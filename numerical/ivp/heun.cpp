@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  * Solve the initial-value problem dy/dt = f(t,y), a<=t<=b, y0=y(a)
- * using Euler's method.
+ * using Heun's method.
  *
  * Params:
  * - f(t,y), the derivative of y with respect to t
@@ -16,13 +16,16 @@ using namespace std;
  *
  * Output: An approximation to y(b)
  */
-double euler(double f(double, double), double y0, double a, double b, double h)
+double heun(double f(double, double), double y0, double a, double b, double h)
 {
-  double w = y0;
+  double w = y0, z;
 
   for (double t = a; t < b; t += h)
   {
-    w = w + h * f(t, w);
+    // Euler's predictor
+    z = w + h * f(t, w);
+
+    w = w + (h / 2) * (f(t, w) + f(t + h, z));
   }
 
   return w;
@@ -41,8 +44,8 @@ int main()
   double y0 = 2;
   double h = 0.25;
 
-  cout << "Solve the IVP dy/dt = -2y + 5t, y(0) = 2, 0<=t<=1 using Euler's method:" << endl;
+  cout << "Solve the IVP dy/dt = -2y + 5t, y(0) = 2, 0<=t<=1 using Heun's method:" << endl;
   cout << "Solution: At t = " << b << ", y = " << setiosflags(ios::fixed) << setprecision(6)
-       << euler(f, y0, a, b, h) << endl;
+       << heun(f, y0, a, b, h) << endl;
   return 0;
 }

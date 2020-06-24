@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  * Solve the initial-value problem dy/dt = f(t,y), a<=t<=b, y0=y(a)
- * using Euler's method.
+ * using Runge-Kutta method of order 4.
  *
  * Params:
  * - f(t,y), the derivative of y with respect to t
@@ -16,13 +16,19 @@ using namespace std;
  *
  * Output: An approximation to y(b)
  */
-double euler(double f(double, double), double y0, double a, double b, double h)
+double rungekutta4(double f(double, double), double y0, double a, double b, double h)
 {
   double w = y0;
+  double K1, K2, K3, K4;
 
   for (double t = a; t < b; t += h)
   {
-    w = w + h * f(t, w);
+    K1 = f(t, w);
+    K2 = f(t + (h / 2), w + (h / 2) * K1);
+    K3 = f(t + (h / 2), w + (h / 2) * K2);
+    K4 = f(t + h, w + h * K3);
+
+    w = w + (h / 6) * (K1 + 2 * K2 + 2 * K3 + K4);
   }
 
   return w;
@@ -41,8 +47,8 @@ int main()
   double y0 = 2;
   double h = 0.25;
 
-  cout << "Solve the IVP dy/dt = -2y + 5t, y(0) = 2, 0<=t<=1 using Euler's method:" << endl;
+  cout << "Solve the IVP dy/dt = -2y + 5t, y(0) = 2, 0<=t<=1 using Runge-Kutta method of order 4:" << endl;
   cout << "Solution: At t = " << b << ", y = " << setiosflags(ios::fixed) << setprecision(6)
-       << euler(f, y0, a, b, h) << endl;
+       << rungekutta4(f, y0, a, b, h) << endl;
   return 0;
 }
