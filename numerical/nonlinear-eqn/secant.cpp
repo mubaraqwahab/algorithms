@@ -15,27 +15,6 @@ using namespace std;
  *
  * Ouput: An approximation to the root of f(x)=0.
  */
-double secant(double f(double), double z0, double z1, double tol, int max_iter);
-
-/* f(x) = x^3 + 2x^2 - 5 */
-double f(double x)
-{
-  return (x * x * x) + (2 * x * x) - 5;
-}
-
-int main()
-{
-  // Test
-  double z0 = 1.5, z1 = 1.6;
-  double tol = 1e-4;
-  int max_iter = 20;
-
-  cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using secant method:" << endl;
-  cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
-       << secant(f, z0, z1, tol, max_iter) << endl;
-  return 0;
-}
-
 double secant(double f(double), double z0, double z1, double tol, int max_iter)
 {
   double z2, error, y0 = f(z0), y1;
@@ -55,4 +34,23 @@ double secant(double f(double), double z0, double z1, double tol, int max_iter)
   } while (i < max_iter && error > tol);
 
   return z2;
+}
+
+/* f(x) = x^3 + 2x^2 - 5 */
+double f(double x)
+{
+  return (x * x * x) + (2 * x * x) - 5;
+}
+
+int main()
+{
+  // Test
+  double z0 = 1.5, z1 = 1.6;
+  double tol = 1e-4;
+  int max_iter = 20;
+
+  cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using secant method:" << endl;
+  cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
+       << secant(f, z0, z1, tol, max_iter) << endl;
+  return 0;
 }
