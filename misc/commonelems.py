@@ -21,19 +21,11 @@ if __name__ == '__main__':
 
   # Test function
   def test(p, q):
-    # Little optimization first :)
-    if len(p) < len(q):
-      shorter = p
-      longer = q
-    else:
-      shorter = q
-      longer = p
-    # Then ...
-    result = [ e for e in shorter ]
-    for e in shorter:
-      if e in longer: longer.remove(e)
+    result = p[:]
+    q = q[:]
+    for e in p:
+      if e in q: q.remove(e)
       else: result.remove(e)
-
     return result
 
   health = True
@@ -43,7 +35,16 @@ if __name__ == '__main__':
     p.sort()
     q.sort()
 
-    health = health and common_elements(p, q) == test(p, q)
+    print("p", p)
+    print("q", q)
+
+    print()
+    print(common_elements(p, q))
+    print(test(p, q))
+
+    if common_elements(p, q) != test(p, q):
+      health = False
+      break
 
   if health:
     print("Alhamdulillah, it works!")

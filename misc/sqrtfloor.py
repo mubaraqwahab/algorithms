@@ -18,7 +18,9 @@ if __name__ == '__main__':
 
   health = True
   for i in range(1, 10001):
-    health = health and sqrt_floor(i) == test(i)
+    if sqrt_floor(i) != test(i):
+      health = False
+      break
 
   if health:
     print("Alhamdulillah, all's well")
