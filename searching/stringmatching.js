@@ -1,5 +1,6 @@
 /**
- * Find the first occurrence of pattern in text using brute force. Return -1 if pattern is not in text.
+ * Find the first occurrence of pattern in text using brute force.
+ * Return -1 if pattern is not in text.
  * @param {string} text
  * @param {string} pattern
  */
