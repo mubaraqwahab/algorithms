@@ -20,7 +20,14 @@ struct vertex
 double green(vector<vertex> V)
 {
   double area = 0;
-  // TODO
+  int n = V.size(), j;
+
+  for (int i = 0; i < n; i++)
+  {
+    j = (i + 1) % n;
+    area += 0.5 * (V[j].x + V[i].x) * (V[j].y - V[i].y);
+  }
+
   return area;
 }
 
@@ -51,7 +58,7 @@ int main()
   // vertex v5 = {1, 5};
   // vertex V[N] = {v1, v2, v3, v4, v5};
 
-  vector<vertex> V{{{0, 3}, {3, 0}, {3, 0}, {4, 4}, {1, 5}}};
+  vector<vertex> V{{{0, 3}, {3, 0}, {5, 1}, {4, 4}, {1, 5}}};
 
   cout << "Polygon Area" << endl;
   cout << "Green's theorem: " << green(V) << endl;
