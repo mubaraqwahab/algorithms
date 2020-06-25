@@ -1,8 +1,9 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-struct vector
+struct vertex
 {
   double x, y;
 };
@@ -11,54 +12,50 @@ struct vector
  * Compute the area of an arbitrary polygon using Green's theorem
  *
  * Params:
- * - an array V of vertices, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
- * - n, the number of vertices of the polygon.
+ * - an array V of n vertices of the polygon, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
  *
  * Output:
  * - The area of the polygon
 */
-double green(vector V[], int n);
+double green(vector<vertex> V)
+{
+  double area = 0;
+  // TODO
+  return area;
+}
 
 /**
  * Compute the area of an arbitrary polygon by exploiting the cross product formula
  *
  * Params:
- * - an array V of vertices, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
- * - n, the number of vertices of the polygon.
+ * - an array V of n vertices of the polygon, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
  *
  * Output:
  * - The area of the polygon
 */
-double crossproduct(vector V[], int n);
+double crossproduct(vector<vertex> V)
+{
+  double area = 0;
+  // TODO
+  return area;
+}
 
 // Test drive
 int main()
 {
-#define N 5
-  vector v1 = {0, 3};
-  vector v2 = {3, 0};
-  vector v3 = {5, 1};
-  vector v4 = {4, 4};
-  vector v5 = {1, 5};
-  vector V[N] = {v1, v2, v3, v4, v5};
+  // #define N 5
+  // vertex v1 = {0, 3};
+  // vertex v2 = {3, 0};
+  // vertex v3 = {3, 0};
+  // vertex v4 = {4, 4};
+  // vertex v5 = {1, 5};
+  // vertex V[N] = {v1, v2, v3, v4, v5};
+
+  vector<vertex> V{{{0, 3}, {3, 0}, {3, 0}, {4, 4}, {1, 5}}};
 
   cout << "Polygon Area" << endl;
-  cout << "Green's theorem: " << green(V, N) << endl;
-  cout << "Cross product: " << crossproduct(V, N) << endl;
+  cout << "Green's theorem: " << green(V) << endl;
+  cout << "Cross product: " << crossproduct(V) << endl;
 
   return 0;
-}
-
-double green(vector V[], int n)
-{
-  double area = 0;
-  // TODO
-  return area;
-}
-
-double crossproduct(vector V[], int n)
-{
-  double area = 0;
-  // TODO
-  return area;
 }
