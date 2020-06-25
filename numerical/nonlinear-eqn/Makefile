@@ -8,6 +8,9 @@ newtonraphson:
 secant:
 	g++ -Wall secant.cpp -o secant.out
 
+bisection:
+	g++ -Wall bisection.cpp -o bisection.out
+
 .PHONY: clean
 clean:
 	rm -fv *.o *.out
