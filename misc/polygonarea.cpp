@@ -71,6 +71,7 @@ int main()
   // Test drive
   vector<point> V{{{0, 3}, {3, 0}, {5, 1}, {4, 4}, {1, 5}}};
 
+  // Print the polygon
   cout << "Polygon: { ";
   for (size_t i = 0; i < V.size(); i++)
   {
