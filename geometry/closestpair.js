@@ -2,19 +2,24 @@ import { min } from "../utils/utils.js";
 
 /**
  * Find the distance between the closest pair of Cartesian points (x,y) in `points` by brute force.
- * @param {Array<{ x, y }>} points
+ * @param {Array<{ x, y }>} points - An array of n (n >= 2) points
  */
 export function bruteForceClosestPair(points) {
-  let d = Number.POSITIVE_INFINITY,
-    norm;
+  let d = Number.POSITIVE_INFINITY;
+  let norm, pair;
   const n = points.length;
+
   for (let i = 0; i < n - 1; i++) {
     for (let j = i + 1; j < n; j++) {
       norm =
         Math.pow(points[i].x - points[j].x, 2) +
         Math.pow(points[i].y - points[j].y, 2);
-      d = min(d, norm);
+      // d = min(d, norm);
+      if (norm < d) {
+        d = norm;
+        pair = [i, j];
+      }
     }
   }
-  return Math.sqrt(d);
+  return pair; //Math.sqrt(d);
 }

@@ -1,11 +1,19 @@
 import { bruteForceClosestPair } from "./closestpair.js";
 
 const points = [
-  { x: 1, y: 2},
-  { x: 2, y: 2},
-  { x: 3, y: 10},
+  { x: 1, y: 2 },
+  { x: 2, y: 3 },
+  { x: 3, y: 10 },
+  { x: 4, y: 10 },
 ];
 
-const distance = bruteForceClosestPair(points)
+const [i, j] = bruteForceClosestPair(points);
 
-console.log(`The closest points in`, points, `are ${distance} unit(s) apart.`);
+console.log(
+  `The closest points in`,
+  points,
+  `are`,
+  points[i],
+  `and`,
+  points[j]
+);
