@@ -7,11 +7,6 @@
     "test": "node --experimental-modules"
   },
   "author": "Mubaraq Wahab",
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "devDependencies": {
     "husky": "^4.2.5",
     "prettier": "2.0.5",
