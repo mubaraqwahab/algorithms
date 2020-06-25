@@ -9,11 +9,4 @@ const points = [
 
 const [i, j] = bruteForceClosestPair(points);
 
-console.log(
-  `The closest points in`,
-  points,
-  `are`,
-  points[i],
-  `and`,
-  points[j]
-);
+console.log(`The closest points in`, points, `are`, points[i], `and`, points[j]);
