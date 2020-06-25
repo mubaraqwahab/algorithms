@@ -11,6 +11,9 @@ secant:
 bisection:
 	g++ -Wall bisection.cpp -o bisection.out
 
+falseposition:
+	g++ -Wall falseposition.cpp -o falseposition.out
+
 .PHONY: clean
 clean:
 	rm -fv *.o *.out
