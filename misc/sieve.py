@@ -1,4 +1,4 @@
-from sqrtfloor import sqrt_floor
+# from sqrtfloor import sqrt_floor
 
 def sieve(n):
   """Implement the sieve of Eratosthenes.
