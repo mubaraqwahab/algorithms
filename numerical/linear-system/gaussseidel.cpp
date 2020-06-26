@@ -14,7 +14,7 @@ vector<double> gaussseidel(
   vector<double> x{x0};
   size_t n = x.size();
 
-  for (size_t k = 0; k < n; k++)
+  for (size_t k = 0; k < max_iter; k++)
   {
     for (size_t i = 0; i < n; i++)
     {
@@ -46,9 +46,9 @@ int main()
   vector<double> b{4, -4, 4, -13};
 
   vector<double> x0{0, 0, 0, 0};
+  double tol = 1e-2;
+  size_t max_iter = 10;
 
-  double tol = 0;
-  size_t max_iter = 1;
   vector<double> x = gaussseidel(A, b, x0, tol, max_iter);
 
   for (const auto &a : x)
@@ -56,6 +56,8 @@ int main()
     cout << setw(12) << setiosflags(ios::fixed) << setprecision(8) << a;
   }
   cout << endl;
+
+  // Solution should be (1.00161160, -0.99945864, 1.00022678, -0.99997765)
 
   return 0;
 }
