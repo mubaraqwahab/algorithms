@@ -32,7 +32,7 @@ vector<double> gaussseidel(const vector<vector<double>> &A,
 
     x0 = x;
 
-  } while (++k < max_iter);
+  } while (++k < max_iter && error > tol);
 
   return x;
 }
@@ -48,11 +48,10 @@ int main()
   size_t max_iter = 10;
   vector<double> x = gaussseidel(A, b, x0, tol, max_iter);
 
-  for (const auto &x : x)
+  for (const auto &a : x)
   {
-    cout << setw(12) << setiosflags(ios::fixed) << setprecision(8) << x;
+    cout << setw(12) << setiosflags(ios::fixed) << setprecision(8) << a;
   }
-
   cout << endl;
 
   return 0;

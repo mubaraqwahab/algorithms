@@ -3,7 +3,7 @@
 using namespace std;
 
 /**
- * Compute the Taxicab norm of two n-dimensional vectors.
+ * Compute the Taxicab norm (i.e. ||*||1) of two n-dimensional vectors.
  *
  * Params:
  * - n-dimensional vectors u and v
@@ -13,7 +13,7 @@ using namespace std;
 double taxicab_norm(const vector<double> &u, const vector<double> &v);
 
 /**
- * Compute the max norm of two n-dimensional vectors.
+ * Compute the max norm (i.e. ||.||∞) of two n-dimensional vectors.
  *
  * Params:
  * - n-dimensional vectors u and v
