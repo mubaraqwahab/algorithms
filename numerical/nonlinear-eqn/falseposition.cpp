@@ -18,9 +18,8 @@ using namespace std;
 double falseposition(double f(double), double a, double b, double tol, size_t max_iter)
 {
   double c, ya = f(a), yb = f(b), yc;
-  size_t i = 0;
 
-  do
+  for (size_t i = 0; i < max_iter; i++)
   {
     c = (yb * a - ya * b) / (yb - ya);
     yc = f(c);
@@ -36,12 +35,11 @@ double falseposition(double f(double), double a, double b, double tol, size_t ma
       ya = yc;
     }
     else
-    {
       break;
-    }
 
-    i++;
-  } while (i < max_iter && b - a > tol);
+    if (b - a <= tol)
+      break;
+  }
 
   return c;
 }
@@ -62,4 +60,7 @@ int main()
   cout << "Solve ln(x+1) - cos(x) = 0 on [0,2] correct to within 1e-2 using the method of false position:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
        << falseposition(f, a, b, tol, max_iter) << endl;
+  // Solution should be x = 0.884511
+
+  return 0;
 }
