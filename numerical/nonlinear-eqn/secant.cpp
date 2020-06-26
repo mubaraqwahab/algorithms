@@ -17,21 +17,20 @@ using namespace std;
  */
 double secant(double f(double), double z0, double z1, double tol, size_t max_iter)
 {
-  double z2, error, y0 = f(z0), y1;
-  size_t i = 0;
+  double z2, y0 = f(z0), y1;
 
-  do
+  for (size_t i = 0; i < max_iter; i++)
   {
     y1 = f(z1);
     z2 = (y1 * z0 - y0 * z1) / (y1 - y0);
 
-    error = abs(z2 - z1);
-    i++;
+    if (abs(z2 - z1) <= tol)
+      break;
 
     z0 = z1;
     y0 = y1;
     z1 = z2;
-  } while (i < max_iter && error > tol);
+  }
 
   return z2;
 }
@@ -52,5 +51,7 @@ int main()
   cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using secant method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
        << secant(f, z0, z1, tol, max_iter) << endl;
+  // Solution should be 1.241897
+
   return 0;
 }

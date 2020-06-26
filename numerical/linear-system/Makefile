@@ -1,8 +1,8 @@
-gaussseidel:
-	g++ -Wall gaussseidel.cpp -o gaussseidel.out
+gaussseidel: norm.o
+	g++ -Wall gaussseidel.cpp norm.o -o gaussseidel.out
 
-norm:
-	g++ -Wall norm.cpp -o norm.out
+norm.o:
+	g++ -Wall -c norm.cpp
 
 .PHONY: clean
 clean:

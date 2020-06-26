@@ -17,18 +17,17 @@ using namespace std;
  */
 double fixedpoint(double g(double), double p0, double tol, size_t max_iter)
 {
-  double p, error;
-  size_t i = 0;
+  double p;
 
-  do
+  for (size_t i = 0; i < max_iter; i++)
   {
     p = g(p0);
 
-    error = abs(p - p0);
-    i++;
+    if (abs(p - p0) <= tol)
+      break;
 
     p0 = p;
-  } while (i < max_iter && error > tol);
+  }
 
   return p;
 }
@@ -49,4 +48,5 @@ int main()
   cout << "Solve x = (3x^2 + 3)^(1/4) correct to within 1e-2 using fixed-point iteration:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
        << fixedpoint(g, p0, tol, max_iter) << endl;
+  // Solution should be x = 1.943317
 }

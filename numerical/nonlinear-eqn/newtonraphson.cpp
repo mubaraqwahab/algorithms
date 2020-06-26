@@ -18,18 +18,17 @@ using namespace std;
  */
 double newtonraphson(double f(double), double g(double), double z0, double tol, size_t max_iter)
 {
-  double z, error;
-  size_t i = 0;
+  double z;
 
-  do
+  for (size_t i = 0; i < max_iter; i++)
   {
     z = z0 - (f(z0) / g(z0));
 
-    error = abs(z - z0);
-    i++;
+    if (abs(z - z0) <= tol)
+      break;
 
     z0 = z;
-  } while (i < max_iter && error > tol);
+  }
 
   return z;
 }
@@ -56,4 +55,7 @@ int main()
   cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using Newton-Raphson method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)
        << newtonraphson(f, g, z0, tol, max_iter) << endl;
+  // Solution should be x = 1.241897
+
+  return 0;
 }
