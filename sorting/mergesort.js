@@ -28,11 +28,8 @@ export function mergesort(array, compare) {
  * @param {function(T,T): number} compare - A comparison function.
  */
 function merge(arrIn1, arrIn2, arrOut, compare) {
-  let i = 0,
-    j = 0,
-    k = 0;
-  const p = arrIn1.length,
-    q = arrIn2.length;
+  let i = 0, j = 0, k = 0;
+  const p = arrIn1.length, q = arrIn2.length;
 
   while (i < p && j < q) {
     if (compare(arrIn1[i], arrIn2[j]) <= 0) {

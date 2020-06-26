@@ -31,9 +31,8 @@ export function max(a, b, key = (n) => n) {
  * Ignore this if you want to compare by actual values.
  */
 export function medianOfThree(a, b, c, key = (n) => n) {
-  const p = key(a),
-    q = key(b),
-    r = key(c);
+  const p = key(a), q = key(b), r = key(c);
+
   if (p < q) {
     if (q < r) return b;
     else if (p < r) return c;

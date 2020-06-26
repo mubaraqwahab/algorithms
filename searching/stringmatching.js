@@ -5,8 +5,7 @@
  * @param {string} pattern
  */
 export function bruteForceStringMatch(text, pattern) {
-  const n = text.length,
-    m = pattern.length;
+  const n = text.length, m = pattern.length;
   for (let i = 0; i < n - m + 1; i++) {
     for (let j = 0; j < m; j++) {
       if (text[i + j] !== pattern[j]) break;

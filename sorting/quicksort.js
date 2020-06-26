@@ -26,8 +26,7 @@ export function quicksort(array, compare, left = 0, right = array.length - 1) {
 function partition(array, compare, left, right) {
   const pivot = array[left];
 
-  let i = left,
-    j = right + 1;
+  let i = left, j = right + 1;
 
   do {
     do i++;
