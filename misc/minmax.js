@@ -2,11 +2,12 @@
  * Return the smaller value of `a` and `b`.
  * @param {any} a
  * @param {any} b
- * @param {function(*): *} [key] `key` should return the key by which `a` and `b` are compared.
- * Ignore this if you want to compare by actual values. (See https://docs.python.org/3/library/stdtypes.html#list.sort)
+ * @param {function(*): *} compare A comparison function.
+ * When called with `a` and `b`, if it returns a positive number, then `a` is considered larger than `b`
+ * Otherwise `a` is considered smaller than `b`.
  */
-export function min(a, b, key = (n) => n) {
-  if (key(a) <= key(b)) return a;
+export function min(a, b, compare) {
+  if (compare(a, b) <= 0) return a;
   else return b;
 }
 
@@ -14,10 +15,9 @@ export function min(a, b, key = (n) => n) {
  * Return the larger value of `a` and `b`.
  * @param {any} a
  * @param {any} b
- * @param {function(*): *} [key] - `key` should return the key by which `a` and `b` are compared.
- * Ignore this if you want to compare by actual values.
+ * @param {function(*): *} compare A comparison function. Same as for `min` function.
  */
-export function max(a, b, key = (n) => n) {
-  if (key(a) >= key(b)) return a;
+export function max(a, b, compare) {
+  if (compare(a, b) > 0) return a;
   else return b;
 }

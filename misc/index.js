@@ -24,11 +24,11 @@ const points = [
 ];
 
 // Compare by y property
-const key = (p) => p.y;
+const compare = (p, q) => p.y - q.y;
 
-const smallest = min(points[0], points[1], key);
-const largest = max(points[0], points[1], key);
-const median = medianOfThree(...points, key);
+const smallest = min(points[0], points[1], compare);
+const largest = max(points[0], points[1], compare);
+const median = medianOfThree(...points, compare);
 
 console.log(`Given ${points} and comparing by y coord`);
 console.log(`min of first two is ${smallest}`);

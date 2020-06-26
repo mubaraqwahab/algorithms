@@ -5,23 +5,23 @@
  * @param {any} a
  * @param {any} b
  * @param {any} c
- * @param {function(*): *} [key] `key` should return the key by which `a` and `b` are compared.
- * Ignore this if you want to compare by actual values.
+ * @param {function(*): *} compare A comparison function.
+ * When called with `a` and `b`, if it returns a positive number, then `a` is considered larger than `b`
+ * Otherwise `a` is considered smaller than `b`.
  */
-export function medianOfThree(a, b, c, key = (n) => n) {
-  const p = key(a), q = key(b), r = key(c);
-
-  if (p < q) {
-    if (q < r) return b;
-    else if (p < r) return c;
+export function medianOfThree(a, b, c, compare) {
+  if (compare(a, b) < 0) {
+    if (compare(b, c) < 0) return b;
+    else if (compare(a, c) < 0) return c;
     else return a;
   } else {
-    if (p < r) return a;
-    else if (q < r) return c;
+    if (compare(a, c) < 0) return a;
+    else if (compare(b, c) < 0) return c;
     else return b;
   }
+
   // OR
-  // return min(max(a, b, key), max(min(a, b, key), c, key), key);
+  // return min(max(a, b, compare), max(min(a, b, compare), c, compare), compare);
 
   // See https://stackoverflow.com/q/1582356/12695621
 }

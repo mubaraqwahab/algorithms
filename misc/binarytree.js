@@ -12,7 +12,10 @@ import { max } from './minmax.js';
 export function height(binTree) {
   // Return -1 if it has no root (i.e. if it's empty)
   if (!binTree.root) return -1;
-  else return max(height(binTree.left), height(binTree.right)) + 1;
+  else {
+    const compare = (m, n) => m - n;
+    return max(height(binTree.left), height(binTree.right), compare) + 1;
+  }
 }
 
 /**
