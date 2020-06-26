@@ -18,7 +18,7 @@ using namespace std;
 double secant(double f(double), double z0, double z1, double tol, size_t max_iter)
 {
   double z2, error, y0 = f(z0), y1;
-  int i = 0;
+  size_t i = 0;
 
   do
   {

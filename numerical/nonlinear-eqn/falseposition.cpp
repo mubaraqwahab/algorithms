@@ -18,7 +18,7 @@ using namespace std;
 double falseposition(double f(double), double a, double b, double tol, size_t max_iter)
 {
   double c, ya = f(a), yb = f(b), yc;
-  int i = 0;
+  size_t i = 0;
 
   do
   {

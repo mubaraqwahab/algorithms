@@ -19,7 +19,7 @@ using namespace std;
 double newtonraphson(double f(double), double g(double), double z0, double tol, size_t max_iter)
 {
   double z, error;
-  int i = 0;
+  size_t i = 0;
 
   do
   {

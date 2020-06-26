@@ -18,7 +18,7 @@ using namespace std;
 double fixedpoint(double g(double), double p0, double tol, size_t max_iter)
 {
   double p, error;
-  int i = 0;
+  size_t i = 0;
 
   do
   {
