@@ -1,3 +1,5 @@
+// import { min, max } from "./minmax.js"
+
 /**
  * Return the median value of `a`, `b` and `c`.
  * @param {any} a
