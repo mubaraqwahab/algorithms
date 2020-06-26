@@ -1,17 +1,18 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-// #include "norm.h"
+#include "norm.h"
 
 using namespace std;
 
 vector<double> gaussseidel(const vector<vector<double>> &A,
                            const vector<double> &b,
-                           const vector<double> &x0,
+                           vector<double> x0,
                            double tol, size_t max_iter)
 {
   vector<double> x{x0};
   size_t n = x.size(), k = 0;
+  double error;
 
   do
   {
@@ -26,6 +27,11 @@ vector<double> gaussseidel(const vector<vector<double>> &A,
       }
       x[i] /= A[i][i];
     }
+
+    // error = max_norm(x, x0);
+
+    x0 = x;
+
   } while (++k < max_iter);
 
   return x;
