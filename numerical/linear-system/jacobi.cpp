@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * Solve the system of linear equations Ax = b using Gauss-Seidel iteration.
+ * Solve the system of linear equations Ax = b using Jacobi iteration.
  *
  * Params:
  * - The matrix of coefficients A of the system.
@@ -17,7 +17,7 @@ using namespace std;
  *
  * Output: An approximation to the solution to the system Ax = b.
  */
-vector<double> gaussseidel(
+vector<double> jacobi(
     const vector<vector<double>> &A,
     const vector<double> &b,
     vector<double> x0,
@@ -35,7 +35,8 @@ vector<double> gaussseidel(
       {
         if (i == j)
           continue;
-        x[i] -= A[i][j] * x[j];
+
+        x[i] -= A[i][j] * x0[j];
       }
       x[i] /= A[i][i];
     }
@@ -61,16 +62,16 @@ int main()
   double tol = 1e-2;
   size_t max_iter = 10;
 
-  vector<double> x = gaussseidel(A, b, x0, tol, max_iter);
+  vector<double> x = jacobi(A, b, x0, tol, max_iter);
 
-  cout << "Gauss-Seidel iteration solution" << endl;
+  cout << "Jacobi iteration solution" << endl;
   for (const auto &a : x)
   {
     cout << setw(10) << setiosflags(ios::fixed) << setprecision(6) << a;
   }
   cout << endl;
 
-  // Solution should be (1.001612, -0.999459, 1.000227, -0.999978)
+  // Solution should be (0.997205, -0.997474, 1.001254, -1.000016)
 
   return 0;
 }
