@@ -59,7 +59,7 @@ vector<vector<double>> create_tableau(
  * - An m-dimensional basis.
  *
  * Output:
- * - If the there are no positive entries in pivot column, return false.
+ * - If there are no positive entries in pivot column, return false.
  * - Otherwise, update the basis parameter and return true.
  */
 bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
@@ -81,7 +81,7 @@ bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector
     }
   }
 
-  // Return false if no theta min was found
+  // No theta min was found
   if (theta_min == 1000000000)
     return false;
 
@@ -101,7 +101,7 @@ bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector
  * - basis, an m-dimensional (column) vector of the indices i (0<=i<n) of the basic variables.
  * - z0, the negative of an initial value of the objective function z.
  *
- * Output: An optimal solution of the LP problem is returned.
+ * Output: An optimal solution to the LP problem is returned.
  * The basis parameter is also modified to be the basis at that solution.
  */
 double simplex(
@@ -114,7 +114,7 @@ double simplex(
   // Initial tableau.
   auto tableau = create_tableau(A, b, c, z0);
 
-  size_t m = A.size(); //, n = c.size();
+  size_t m = A.size(), n = c.size();
   size_t pivotcol;
 
   // Repeat as long as there are negative coefficients in the objective row
@@ -128,8 +128,9 @@ double simplex(
 
     // TODO: Pivot!
     break;
-  };
-  return 0.0;
+  }
+
+  return -tableau[m][n];
 }
 
 /* TESTS */
@@ -147,7 +148,7 @@ int main()
   vector<size_t> basis{0, 1, 2};
   double z0 = 60;
 
-  simplex(A, b, c, basis, z0);
+  cout << "z = " << simplex(A, b, c, basis, z0) << endl;
 
   for (auto &e : basis)
     cout << "x" << e + 1 << endl;
