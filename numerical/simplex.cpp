@@ -127,7 +127,7 @@ double simplex(
   size_t pivotcol;
 
   // Repeat as long as there are negative coefficients in the objective row
-  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end())) >= 0)
+  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) >= 0)
   {
     if (!update_basis(tableau, pivotcol, basis))
     {
