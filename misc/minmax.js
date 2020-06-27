@@ -43,10 +43,10 @@ export function max(a, b, compare) {
  * @param {function(any, any): number} compare A comparison function. Same as for `min`.
  */
 export function maxElement(array, compare) {
-  let min = 0;
+  let max = 0;
   for (let i = 1; i < array.length; i++) {
-    if (compare(array[i], array[min]) > 0)
-      min = i;
+    if (compare(array[i], array[max]) > 0)
+      max = i;
   }
-  return min;
+  return max;
 }
