@@ -91,6 +91,17 @@ ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vec
   return pivotrow;
 }
 
+void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
+{
+  double pivot = A[pivotrow][pivotcol];
+  size_t m = A.size(), n = A[0].size();
+
+  for (size_t j = 0; j < n; j++)
+  {
+    A[pivotrow][j] /= pivot;
+  }
+}
+
 /**
  * Solve a linear programming (LP) problem in canonical form using the Simplex method.
  *
@@ -149,18 +160,36 @@ int main()
   vector<size_t> basis{0, 1, 2};
   double z0 = 60;
 
-  cout << "z = " << simplex(A, b, c, basis, z0) << endl;
+  // cout << "z = " << simplex(A, b, c, basis, z0) << endl;
 
-  for (auto &e : basis)
-    cout << "x" << e + 1 << endl;
+  // for (auto &e : basis)
+  //   cout << "x" << e + 1 << endl;
 
   // TEST create tableau
-  // auto tableau = create_tableau(A, b, c, z0);
+  auto tableau = create_tableau(A, b, c, z0);
 
-  // for (const auto &row : tableau)
-  //   for (double e : row)
-  //     cout << setw(4) << e;
-  // cout << endl;
+  cout << "Before pivot" << endl;
+  for (const auto &row : tableau)
+  {
+    for (double e : row)
+    {
+      cout << setw(6) << setprecision(3) << e;
+    }
+    cout << endl;
+  }
+
+  // TEST pivot
+  pivot(tableau, 2, 3);
+
+  cout << "After pivot" << endl;
+  for (const auto &row : tableau)
+  {
+    for (double e : row)
+    {
+      cout << setw(6) << setprecision(3) << e;
+    }
+    cout << endl;
+  }
 
   return 0;
 }
