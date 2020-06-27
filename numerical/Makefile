@@ -1,8 +1,9 @@
-executables = polygonarea simplex
+polygonarea: % : %.cpp
+	g++ -Wall $^ -o $@
 
-$(executables): % : %.cpp
+simplex: % : %.cpp %-helpers.cpp
 	g++ -Wall $^ -o $@
 
 .PHONY: clean
 clean:
-	rm -fv *.o $(executables)
+	rm -fv *.o polygonarea simplex
