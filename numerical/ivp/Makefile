@@ -1,13 +1,13 @@
 euler:
-	g++ -Wall euler.cpp -o euler.out
+	g++ -Wall euler.cpp -o euler
 
 heun:
-	g++ -Wall heun.cpp -o heun.out
+	g++ -Wall heun.cpp -o heun
 
 rungekutta4:
-	g++ -Wall rungekutta4.cpp -o rungekutta4.out
+	g++ -Wall rungekutta4.cpp -o rungekutta4
 
 
 .PHONY: clean
 clean:
-	rm -fv *.o *.out
+	rm -fv *.o euler heun rungekutta4
