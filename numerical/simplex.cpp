@@ -53,9 +53,7 @@ vector<vector<double>> create_tableau(
 
   // Copy constraint constants into tableau
   for (size_t i = 0; i < m; i++)
-  {
     tableau[i].push_back(b[i]);
-  }
 
   // Copy objective coefficients and constant into tableau
   tableau.push_back(c);
@@ -98,7 +96,7 @@ int main()
   for (const auto &row : tableau)
     for (double e : row)
       cout << setw(4) << e;
-    cout << endl;
+  cout << endl;
 
   return 0;
 }
