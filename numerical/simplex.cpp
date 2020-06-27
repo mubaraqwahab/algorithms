@@ -105,11 +105,27 @@ int main()
   // int mostnegativepos = mostnegative(v.begin(), v.end());
   // cout << "The most negative number is at " << mostnegativepos << endl;
 
-  vector<vector<double>> A{{{1, 0, 0, 2, -1}, {0, 1, 0, -1, -5}, {0, 0, 1, 6, -12}}};
-  vector<double> b{10, 20, 18};
-  vector<double> c{0, 0, 0, -2, 3};
-  vector<size_t> basis{0, 1, 2};
-  double z0 = 60;
+  /**
+   * Solve the LP Problem in canonical form:
+   * Minimize z = -700 x1 - 750 x2 - 550 x3
+   * subject to:    25 x1 +  30 x2 +  20 x3 + x4           = 2400
+   *                15 x1 +  15 x2 +  10 x3      + x5      = 1260
+   *                 - x1 -     x2 +   4 x3           + x6 = 0
+   *                x1, x2, x3, x4, x5, x6 >= 0.
+   */
+
+  // Constraint coefficients
+  vector<vector<double>> A{{{25, 30, 20, 1, 0, 0},
+                            {15, 15, 10, 0, 1, 0},
+                            {-1, -1, 4, 0, 0, 1}}};
+  // Constraint constants
+  vector<double> b{2400, 1260, 0};
+  // Coefficients of objective function z
+  vector<double> c{-700, -750, -550, 0, 0, 0};
+  // Indices of basic variables
+  vector<size_t> basis{3, 4, 5};
+  // Negative of the value z at the basis
+  double z0 = 0;
 
   // TEST simplex
   double z;
