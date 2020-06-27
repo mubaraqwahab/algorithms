@@ -1,13 +1,8 @@
-euler:
-	g++ -Wall euler.cpp -o euler
+executables = euler heun rungekutta4
 
-heun:
-	g++ -Wall heun.cpp -o heun
-
-rungekutta4:
-	g++ -Wall rungekutta4.cpp -o rungekutta4
-
+$(executables): % : %.cpp
+	g++ -Wall $^ -o $@
 
 .PHONY: clean
 clean:
-	rm -fv *.o euler heun rungekutta4
+	rm -fv *.o $(executables)
