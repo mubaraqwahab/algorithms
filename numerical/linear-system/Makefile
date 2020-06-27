@@ -1,12 +1,11 @@
-jacobi: norm.o
-	g++ -Wall jacobi.cpp norm.o -o jacobi
+executables = jacobi gaussseidel
 
-gaussseidel: norm.o
-	g++ -Wall gaussseidel.cpp norm.o -o gaussseidel
+$(executables): % : %.cpp norm.o
+	g++ -Wall $^ -o $@
 
 norm.o:
 	g++ -Wall -c norm.cpp
 
 .PHONY: clean
 clean:
-	rm -fv *.o jacobi gaussseidel
+	rm -fv *.o $(executables)
