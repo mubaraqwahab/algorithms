@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -68,7 +69,7 @@ ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vec
 
   // Find the pivot row (and thus, the departing variable)
   size_t pivotrow;
-  double theta_min = 1000000000;
+  double theta_min = numeric_limits<double>::infinity();
   for (size_t i = 0; i < m; i++)
   {
     // Compute the theta ratio for each row and find the minimum
@@ -82,7 +83,7 @@ ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vec
   }
 
   // No theta min was found
-  if (theta_min == 1000000000)
+  if (theta_min == numeric_limits<double>::infinity())
     return -1;
 
   // Update the basis
@@ -136,8 +137,10 @@ void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
  * - basis, an m-dimensional (column) vector of the indices i (0<=i<n) of the basic variables.
  * - z0, the negative of an initial value of the objective function z.
  *
- * Output: An optimal solution to the LP problem is returned.
- * The basis parameter is also modified to be the basis at that solution.
+ * Output:
+ * - If the LP problem has an optimal solution, an optimal solution is returned.
+ *   The basis parameter is also modified to be the basis at that solution.
+ * - Otherwise if the problem is unbounded
  */
 double simplex(
     const vector<vector<double>> &A,
@@ -158,8 +161,8 @@ double simplex(
     ssize_t pivotrow = update_basis(tableau, pivotcol, basis);
     if (pivotrow == -1)
     {
-      // The problem is unbounded. Return -infinity?
-      return -1000000000;
+      // The problem is unbounded.
+      return -numeric_limits<double>::infinity();
     }
 
     pivot(tableau, pivotrow, pivotcol);
