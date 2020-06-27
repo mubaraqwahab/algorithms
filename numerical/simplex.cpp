@@ -162,8 +162,7 @@ double simplex(
       return -1000000000;
     }
 
-    // TODO: Pivot!
-    break;
+    pivot(tableau, pivotrow, pivotcol);
   }
 
   return -tableau[m][n];
@@ -197,9 +196,14 @@ int main()
   double z0 = 60;
 
   // TEST simplex
-  // cout << "z = " << simplex(A, b, c, basis, z0) << endl;
-  // for (auto &e : basis)
-  //   cout << "x" << e + 1 << endl;
+  cout << "Solution: z = " << simplex(A, b, c, basis, z0) << endl;
+  cout << "The basic variables are: ";
+  size_t i = 0;
+  for (; i < basis.size() - 2; i++)
+  {
+    cout << "x" << basis[i] << ", ";
+  }
+  cout << "x" << basis[i] << " and x" << basis[i + 1] << "." << endl;
 
   // TEST create tableau
   // auto tableau = create_tableau(A, b, c, z0);
