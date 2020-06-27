@@ -17,11 +17,10 @@ using namespace std;
  *
  * Output: An approximation to the solution to the system Ax = b.
  */
-vector<double> gaussseidel(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    vector<double> x0,
-    double tol, size_t max_iter)
+vector<double> gaussseidel(const vector<vector<double>> &A,
+                           const vector<double> &b,
+                           vector<double> x0,
+                           double tol, size_t max_iter)
 {
   vector<double> x{x0};
   size_t n = x.size();
