@@ -56,6 +56,38 @@ vector<vector<double>> create_tableau(
   return tableau;
 }
 
+bool update_basis(
+    const vector<vector<double>> &tableau,
+    size_t pivotcol,
+    vector<size_t> &basis)
+{
+  size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
+
+  // Find the pivot row (and thus, the departing variable)
+  size_t pivotrow;
+  double theta_min = 1000000000;
+  for (size_t i = 0; i < m; i++)
+  {
+    // Compute the theta ratio for each row and find the minimum
+    double entry, theta;
+    if ((entry = tableau[i][pivotcol]) > 0 &&
+        (theta = tableau[i][n] / entry) < theta_min)
+    {
+      theta_min = theta;
+      pivotrow = i;
+    }
+  }
+
+  // Return false if no theta min was found
+  if (theta_min == 1000000000)
+    return false;
+
+  // Update the basis
+  basis[pivotrow] = pivotcol;
+
+  return true;
+}
+
 /**
  * Solve a linear programming (LP) problem in canonical form using the Simplex method.
  *
@@ -79,29 +111,17 @@ double simplex(
   // Initial tableau.
   auto tableau = create_tableau(A, b, c, z0);
 
-  size_t m = A.size(), n = c.size();
+  size_t m = A.size(); //, n = c.size();
   size_t pivotcol;
 
   // Repeat as long as there are negative coefficients in the objective row
   while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end())) >= 0)
   {
-    // Find the pivot row (and thus, the departing variable)
-    size_t pivotrow;
-    double theta_min = 1000000000;
-    for (size_t i = 0; i < m; i++)
+    if (!update_basis(tableau, pivotcol, basis))
     {
-      // Compute the theta ratio for each row and find the minimum
-      double entry, theta;
-      if ((entry = tableau[i][pivotcol]) > 0 &&
-          (theta = tableau[i][n] / entry) < theta_min)
-      {
-        theta_min = theta;
-        pivotrow = i;
-      }
+      // The problem is unbounded. Return -infinity?
+      return -1;
     }
-
-    // Update the basis
-    basis[pivotrow] = pivotcol;
 
     // TODO: Pivot!
     break;
