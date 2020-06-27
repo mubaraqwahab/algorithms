@@ -56,6 +56,18 @@ vector<vector<double>> create_tableau(
   return tableau;
 }
 
+/**
+ * Update the basis of a simplex tableau.
+ *
+ * Params:
+ * - An (m+1)*(n+1) tableau. (m is the size of the basis, n is the number of variables)
+ * - pivotcol, the index of the pivot column in the tableau
+ * - An m-dimensional basis.
+ *
+ * Output:
+ * - If the LP problem is unbounded (i.e. no positive entries in pivot col.), return false.
+ * - Otherwise, update the basis parameter and return true.
+ */
 bool update_basis(
     const vector<vector<double>> &tableau,
     size_t pivotcol,
