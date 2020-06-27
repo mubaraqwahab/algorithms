@@ -152,11 +152,10 @@ ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const
   return (*smallest < 0) ? distance(start, smallest) : -1;
 }
 
-vector<vector<double>> create_tableau(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    const vector<double> &c,
-    double z0)
+vector<vector<double>> create_tableau(const vector<vector<double>> &A,
+                                      const vector<double> &b,
+                                      const vector<double> &c,
+                                      double z0)
 {
   size_t m = A.size();
 
@@ -245,12 +244,11 @@ vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const
   return solution;
 }
 
-pair<double, vector<double>> simplex(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    const vector<double> &c,
-    vector<size_t> &basis,
-    double z0)
+pair<double, vector<double>> simplex(const vector<vector<double>> &A,
+                                     const vector<double> &b,
+                                     const vector<double> &c,
+                                     vector<size_t> &basis,
+                                     double z0)
 {
   // Initial tableau.
   auto tableau = create_tableau(A, b, c, z0);
