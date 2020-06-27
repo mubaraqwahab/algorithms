@@ -32,18 +32,17 @@ vector<vector<double>> create_tableau(const vector<vector<double>> &A,
                                       double z0);
 
 /**
- * Update the basis of a simplex tableau.
+ * Determine the pivot row of a simplex tableau.
  *
  * Params:
  * - An (m+1)*(n+1) tableau. (m is the size of the basis, n is the number of variables)
  * - pivotcol, the index of the pivot column in the tableau
- * - An m-dimensional basis.
  *
  * Output:
  * - If there are no positive entries in pivot column, return -1.
- * - Otherwise, update the basis parameter and return the index of the pivot row.
+ * - Otherwise, return the index of the pivot row.
  */
-ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis);
+ssize_t find_pivot_row(const vector<vector<double>> &tableau, size_t pivotcol);
 
 /**
  * Pivots a matrix.
@@ -175,7 +174,7 @@ vector<vector<double>> create_tableau(
   return tableau;
 }
 
-ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
+ssize_t find_pivot_row(const vector<vector<double>> &tableau, size_t pivotcol)
 {
   size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
 
@@ -197,9 +196,6 @@ ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vec
   // No theta min was found
   if (theta_min == numeric_limits<double>::infinity())
     return -1;
-
-  // Update the basis
-  basis[pivotrow] = pivotcol;
 
   return pivotrow;
 }
@@ -263,12 +259,15 @@ pair<double, vector<double>> simplex(
   // Repeat as long as there are negative coefficients in the objective row
   while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) != -1)
   {
-    ssize_t pivotrow = update_basis(tableau, pivotcol, basis);
+    ssize_t pivotrow = find_pivot_row(tableau, pivotcol);
     if (pivotrow == -1)
     {
       // The problem is unbounded.
       return make_pair(-numeric_limits<double>::infinity(), vector<double>{});
     }
+
+    // Update the basis
+    basis[pivotrow] = pivotcol;
 
     pivot(tableau, pivotrow, pivotcol);
   }
