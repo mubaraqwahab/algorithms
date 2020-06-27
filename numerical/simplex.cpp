@@ -13,7 +13,7 @@ using namespace std;
  * - start, an iterator to the start of the list
  * - stop, an iterator to the element past-the-end of the list
  */
-int mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
+ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
 {
   auto smallest = min_element(start, stop);
   return (*smallest < 0) ? distance(start, smallest) : -1;
@@ -59,10 +59,10 @@ vector<vector<double>> create_tableau(
  * - An m-dimensional basis.
  *
  * Output:
- * - If there are no positive entries in pivot column, return false.
- * - Otherwise, update the basis parameter and return true.
+ * - If there are no positive entries in pivot column, return -1.
+ * - Otherwise, update the basis parameter and return the index of the pivot row.
  */
-bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
+ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
 {
   size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
 
@@ -83,12 +83,12 @@ bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector
 
   // No theta min was found
   if (theta_min == 1000000000)
-    return false;
+    return -1;
 
   // Update the basis
   basis[pivotrow] = pivotcol;
 
-  return true;
+  return pivotrow;
 }
 
 /**
@@ -115,15 +115,16 @@ double simplex(
   auto tableau = create_tableau(A, b, c, z0);
 
   size_t m = A.size(), n = c.size();
-  size_t pivotcol;
+  ssize_t pivotcol;
 
   // Repeat as long as there are negative coefficients in the objective row
-  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) >= 0)
+  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) != -1)
   {
-    if (!update_basis(tableau, pivotcol, basis))
+    ssize_t pivotrow = update_basis(tableau, pivotcol, basis);
+    if (pivotrow == -1)
     {
       // The problem is unbounded. Return -infinity?
-      return -1;
+      return -1000000000;
     }
 
     // TODO: Pivot!
