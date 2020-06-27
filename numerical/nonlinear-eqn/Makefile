@@ -1,17 +1,17 @@
 # (Use -I to specify include path)
-fixedpoint:
+fixedpoint: fixedpoint.cpp
 	g++ -Wall fixedpoint.cpp -o fixedpoint
 
-newtonraphson:
+newtonraphson: newtonraphson.cpp
 	g++ -Wall newtonraphson.cpp -o newtonraphson
 
-secant:
+secant: secant.cpp
 	g++ -Wall secant.cpp -o secant
 
-bisection:
+bisection: bisection.cpp
 	g++ -Wall bisection.cpp -o bisection
 
-falseposition:
+falseposition: falseposition.cpp
 	g++ -Wall falseposition.cpp -o falseposition
 
 .PHONY: clean
