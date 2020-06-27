@@ -19,12 +19,6 @@ int mostnegative(vector<double>::const_iterator start, vector<double>::const_ite
   return (*smallest < 0) ? distance(start, smallest) : -1;
 }
 
-int mostnegative(const vector<double> &v)
-{
-  auto smallest = min_element(v.begin(), v.end());
-  return (*smallest < 0) ? distance(v.begin(), smallest) : -1;
-}
-
 /**
  * Create a simplex tableau.
  *
@@ -65,13 +59,10 @@ vector<vector<double>> create_tableau(
  * - An m-dimensional basis.
  *
  * Output:
- * - If the LP problem is unbounded (i.e. no positive entries in pivot col.), return false.
+ * - If the there are no positive entries in pivot column, return false.
  * - Otherwise, update the basis parameter and return true.
  */
-bool update_basis(
-    const vector<vector<double>> &tableau,
-    size_t pivotcol,
-    vector<size_t> &basis)
+bool update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
 {
   size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
 
