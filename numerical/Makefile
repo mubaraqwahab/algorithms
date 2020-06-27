@@ -1,9 +1,8 @@
-polygonarea: polygonarea.cpp
-	g++ -Wall polygonarea.cpp -o polygonarea
+executables = polygonarea simplex
 
-simplex: simplex.cpp
-	g++ -Wall simplex.cpp -o simplex
+$(executables): % : %.cpp
+	g++ -Wall $^ -o $@
 
 .PHONY: clean
 clean:
-	rm -fv *.o polygonarea simplex
+	rm -fv *.o $(executables)
