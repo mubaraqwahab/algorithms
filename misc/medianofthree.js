@@ -5,7 +5,7 @@
  * @param {any} a
  * @param {any} b
  * @param {any} c
- * @param {function(*): *} compare A comparison function.
+ * @param {function(any, any): number} compare A comparison function.
  * When called with `a` and `b`, if it returns a positive number, then `a` is considered larger than `b`
  * Otherwise `a` is considered smaller than `b`.
  */

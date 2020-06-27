@@ -1,4 +1,4 @@
-import { min, max } from "./minmax.js";
+import { minElement, maxElement } from "./minmax.js";
 import { medianOfThree } from "./medianofthree.js";
 import { height, preorder, inorder, postorder } from './binarytree.js';
 
@@ -26,13 +26,13 @@ const points = [
 // Compare by y property
 const compare = (p, q) => p.y - q.y;
 
-const smallest = min(points[0], points[1], compare);
-const largest = max(points[0], points[1], compare);
+const smallest = points[minElement(points, compare)];
+const largest = points[maxElement(points, compare)];
 const median = medianOfThree(...points, compare);
 
 console.log(`Given ${points} and comparing by y coord`);
-console.log(`min of first two is ${smallest}`);
-console.log(`max of first two is ${largest}`);
+console.log(`min is ${smallest}`);
+console.log(`max is ${largest}`);
 console.log(`median is ${median}`);
 
 

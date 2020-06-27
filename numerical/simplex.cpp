@@ -96,13 +96,9 @@ int main()
   auto tableau = create_tableau(A, b, c, z0);
 
   for (const auto &row : tableau)
-  {
     for (double e : row)
-    {
       cout << setw(4) << e;
-    }
     cout << endl;
-  }
 
   return 0;
 }
