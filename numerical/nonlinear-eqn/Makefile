@@ -1,19 +1,15 @@
-# (Use -I to specify include path)
-fixedpoint: fixedpoint.cpp
-	g++ -Wall fixedpoint.cpp -o fixedpoint
+executables = fixedpoint newtonraphson secant bisection falseposition
 
-newtonraphson: newtonraphson.cpp
-	g++ -Wall newtonraphson.cpp -o newtonraphson
+# For % and %.cpp in the following, see https://www.gnu.org/software/make/manual/make.html#Static-Pattern
+# What they do here (simply): if 'abc' is a target, then 'abc.cpp' should be its prerequisite
 
-secant: secant.cpp
-	g++ -Wall secant.cpp -o secant
+# $^ = all prerequisites
+# $@ = filename of target
+# See https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables
 
-bisection: bisection.cpp
-	g++ -Wall bisection.cpp -o bisection
-
-falseposition: falseposition.cpp
-	g++ -Wall falseposition.cpp -o falseposition
+$(executables): % : %.cpp
+	g++ -Wall $^ -o $@
 
 .PHONY: clean
 clean:
-	rm -fv *.o fixedpoint newtonraphson secant bisection falseposition
+	rm -fv *.o $(executables)
