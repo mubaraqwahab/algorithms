@@ -13,7 +13,7 @@ export function min(a, b, compare) {
 }
 
 /**
- * Return the index of the leftmost smallest element in an array.
+ * Return the index of the leftmost smallest element in a non-empty array.
  * @param {Array<T>} array
  * @param {function(any, any): number} compare A comparison function. Same as for `min`.
  */
@@ -38,7 +38,7 @@ export function max(a, b, compare) {
 }
 
 /**
- * Return the index of the leftmost largest element in an array.
+ * Return the index of the leftmost largest element in a non-empty array.
  * @param {Array<T>} array
  * @param {function(any, any): number} compare A comparison function. Same as for `min`.
  */

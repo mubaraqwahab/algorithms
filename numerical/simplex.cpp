@@ -2,34 +2,28 @@
 #include <iomanip>
 #include <algorithm>
 #include <vector>
-#include <array>
 
 using namespace std;
 
 /**
- * Solve a linear programming (LP) problem in canonical form using the Simplex method.
+ * Returns the index of the most-negative number in a nonempty list (vector).
+ * If there's no negative number, -1 is returned.
  *
  * Params:
- * - A, an m*n (m <= n) matrix of coefficients of the constraints.
- * - b, an m-dimensional (column) vector of constants of the constraints.
- * - c, an n-dimensional (row) vector of coefficients of the objective function.
- * - basis, an m-dimensional (column) vector of the indices i (0<=i<n) of the basic variables.
- * - z0, the negative of an initial value of the objective function z.
- *
- * Output: An optimal solution of the LP problem is returned.
- * The basis parameter is also modified to be the basis at that solution.
+ * - start, an iterator to the start of the list
+ * - stop, an iterator to the element past-the-end of the list
  */
-double simplex(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    const vector<double> &c,
-    vector<double> &basis,
-    double z0)
+int mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
 {
-  return 0.0;
+  auto smallest = min_element(start, stop);
+  return (*smallest < 0) ? distance(start, smallest) : -1;
 }
 
-/* HELPERS */
+int mostnegative(const vector<double> &v)
+{
+  auto smallest = min_element(v.begin(), v.end());
+  return (*smallest < 0) ? distance(v.begin(), smallest) : -1;
+}
 
 /**
  * Create a simplex tableau.
@@ -63,17 +57,56 @@ vector<vector<double>> create_tableau(
 }
 
 /**
- * Returns the index of the most-negative number in a nonempty list (vector).
- * If there's no negative number, -1 is returned.
+ * Solve a linear programming (LP) problem in canonical form using the Simplex method.
  *
  * Params:
- * - start, an iterator to the start of the list
- * - stop, an iterator to the element past-the-end of the list
+ * - A, an m*n (m <= n) matrix of coefficients of the constraints.
+ * - b, an m-dimensional (column) vector of constants of the constraints.
+ * - c, an n-dimensional (row) vector of coefficients of the objective function.
+ * - basis, an m-dimensional (column) vector of the indices i (0<=i<n) of the basic variables.
+ * - z0, the negative of an initial value of the objective function z.
+ *
+ * Output: An optimal solution of the LP problem is returned.
+ * The basis parameter is also modified to be the basis at that solution.
  */
-int mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
+double simplex(
+    const vector<vector<double>> &A,
+    const vector<double> &b,
+    const vector<double> &c,
+    vector<size_t> &basis,
+    double z0)
 {
-  auto smallest = min_element(start, stop);
-  return (*smallest < 0) ? distance(start, smallest) : -1;
+  // Initial tableau.
+  auto tableau = create_tableau(A, b, c, z0);
+
+  size_t m = A.size(), n = c.size();
+  size_t pivotcol;
+
+  // Repeat as long as there are negative coefficients in the objective row
+  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end())) >= 0)
+  {
+    // Find the pivot row (and thus, the departing variable)
+    size_t pivotrow;
+    double theta_min = 1000000000;
+    for (size_t i = 0; i < m; i++)
+    {
+      // Compute the theta ratio for each row and find the minimum
+      double entry, theta;
+      if ((entry = tableau[i][pivotcol]) > 0 &&
+          (theta = tableau[i][n] / entry) < theta_min)
+      {
+        theta_min = theta;
+        pivotrow = i;
+      }
+    }
+
+    // Update the basis
+    basis[pivotrow] = pivotcol;
+
+    // TODO: Pivot!
+    break;
+  };
+  return 0.0;
 }
 
 /* TESTS */
@@ -85,18 +118,24 @@ int main()
   // int mostnegativepos = mostnegative(v.begin(), v.end());
   // cout << "The most negative number is at " << mostnegativepos << endl;
 
-  vector<vector<double>> A{{{1, 0, 2, -1}, {0, 1, -1, -5}}};
-  vector<double> b{10, 20};
-  vector<double> c{0, 0, 2, -3};
+  vector<vector<double>> A{{{1, 0, 0, 2, -1}, {0, 1, 0, -1, -5}, {0, 0, 1, 6, -12}}};
+  vector<double> b{10, 20, 18};
+  vector<double> c{0, 0, 0, -2, 3};
+  vector<size_t> basis{0, 1, 2};
   double z0 = 60;
 
-  // TEST create tableau
-  auto tableau = create_tableau(A, b, c, z0);
+  simplex(A, b, c, basis, z0);
 
-  for (const auto &row : tableau)
-    for (double e : row)
-      cout << setw(4) << e;
-  cout << endl;
+  for (auto &e : basis)
+    cout << "x" << e + 1 << endl;
+
+  // TEST create tableau
+  // auto tableau = create_tableau(A, b, c, z0);
+
+  // for (const auto &row : tableau)
+  //   for (double e : row)
+  //     cout << setw(4) << e;
+  // cout << endl;
 
   return 0;
 }
