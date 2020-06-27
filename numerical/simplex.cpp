@@ -15,11 +15,7 @@ using namespace std;
  * - start, an iterator to the start of the list
  * - stop, an iterator to the element past-the-end of the list
  */
-ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
-{
-  auto smallest = min_element(start, stop);
-  return (*smallest < 0) ? distance(start, smallest) : -1;
-}
+ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop);
 
 /**
  * Create a simplex tableau.
@@ -33,23 +29,7 @@ ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const
 vector<vector<double>> create_tableau(const vector<vector<double>> &A,
                                       const vector<double> &b,
                                       const vector<double> &c,
-                                      double z0)
-{
-  size_t m = A.size();
-
-  // Copy the constraint coefficients into tableau
-  vector<vector<double>> tableau = A;
-
-  // Copy constraint constants into tableau
-  for (size_t i = 0; i < m; i++)
-    tableau[i].push_back(b[i]);
-
-  // Copy objective coefficients and constant into tableau
-  tableau.push_back(c);
-  tableau[m].push_back(z0);
-
-  return tableau;
-}
+                                      double z0);
 
 /**
  * Update the basis of a simplex tableau.
@@ -63,34 +43,7 @@ vector<vector<double>> create_tableau(const vector<vector<double>> &A,
  * - If there are no positive entries in pivot column, return -1.
  * - Otherwise, update the basis parameter and return the index of the pivot row.
  */
-ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
-{
-  size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
-
-  // Find the pivot row (and thus, the departing variable)
-  size_t pivotrow;
-  double theta_min = numeric_limits<double>::infinity();
-  for (size_t i = 0; i < m; i++)
-  {
-    // Compute the theta ratio for each row and find the minimum
-    double entry, theta;
-    if ((entry = tableau[i][pivotcol]) > 0 &&
-        (theta = tableau[i][n] / entry) < theta_min)
-    {
-      theta_min = theta;
-      pivotrow = i;
-    }
-  }
-
-  // No theta min was found
-  if (theta_min == numeric_limits<double>::infinity())
-    return -1;
-
-  // Update the basis
-  basis[pivotrow] = pivotcol;
-
-  return pivotrow;
-}
+ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis);
 
 /**
  * Pivots a matrix.
@@ -102,48 +55,12 @@ ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vec
  *
  * Output: matrix A reduced to canonical form. (Nothing is returned.)
  */
-void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
-{
-  double pivot = A[pivotrow][pivotcol];
-  size_t m = A.size(), n = A[0].size();
+void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol);
 
-  // Divide the pivot row by the pivot
-  for (size_t j = 0; j < n; j++)
-  {
-    A[pivotrow][j] /= pivot;
-  }
-
-  // Subtract other rows from the pivot row
-  for (size_t i = 0; i < m; i++)
-  {
-    if (i == pivotrow)
-      continue;
-
-    double multiplier = A[i][pivotcol];
-    for (size_t j = 0; j < n; j++)
-    {
-      A[i][j] -= multiplier * A[pivotrow][j];
-    }
-  }
-}
-
-vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const vector<size_t> &basis)
-{
-  size_t n = tableau[0].size() - 1;
-  vector<double> solution(n);
-
-  for (size_t i = 0; i < n; i++)
-  {
-    auto it = find(basis.begin(), basis.end(), i);
-    if (it != basis.end())
-    {
-      size_t pos = distance(basis.begin(), it);
-      solution[i] = tableau[pos][n];
-    }
-  }
-
-  return solution;
-}
+/**
+ * Given a simplex tableau and its basis, return (a vector of) the basic solution.
+ */
+vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const vector<size_t> &basis);
 
 /**
  * Solve a linear programming (LP) problem in canonical form using the Simplex method.
@@ -166,31 +83,7 @@ pair<double, vector<double>> simplex(const vector<vector<double>> &A,
                                      const vector<double> &b,
                                      const vector<double> &c,
                                      vector<size_t> &basis,
-                                     double z0)
-{
-  // Initial tableau.
-  auto tableau = create_tableau(A, b, c, z0);
-
-  size_t m = A.size(), n = c.size();
-  ssize_t pivotcol;
-
-  // Repeat as long as there are negative coefficients in the objective row
-  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) != -1)
-  {
-    ssize_t pivotrow = update_basis(tableau, pivotcol, basis);
-    if (pivotrow == -1)
-    {
-      // The problem is unbounded.
-      return make_pair(-numeric_limits<double>::infinity(), vector<double>{});
-    }
-
-    pivot(tableau, pivotrow, pivotcol);
-  }
-
-  vector<double> solution = get_tableau_solution(tableau, basis);
-
-  return make_pair(-tableau[m][n], solution);
-}
+                                     double z0);
 
 /* TESTS */
 
@@ -250,4 +143,137 @@ int main()
   // print2darr(tableau);
 
   return 0;
+}
+
+/* DEFINITIONS */
+
+ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
+{
+  auto smallest = min_element(start, stop);
+  return (*smallest < 0) ? distance(start, smallest) : -1;
+}
+
+vector<vector<double>> create_tableau(
+    const vector<vector<double>> &A,
+    const vector<double> &b,
+    const vector<double> &c,
+    double z0)
+{
+  size_t m = A.size();
+
+  // Copy the constraint coefficients into tableau
+  vector<vector<double>> tableau = A;
+
+  // Copy constraint constants into tableau
+  for (size_t i = 0; i < m; i++)
+    tableau[i].push_back(b[i]);
+
+  // Copy objective coefficients and constant into tableau
+  tableau.push_back(c);
+  tableau[m].push_back(z0);
+
+  return tableau;
+}
+
+ssize_t update_basis(const vector<vector<double>> &tableau, size_t pivotcol, vector<size_t> &basis)
+{
+  size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
+
+  // Find the pivot row (and thus, the departing variable)
+  size_t pivotrow;
+  double theta_min = numeric_limits<double>::infinity();
+  for (size_t i = 0; i < m; i++)
+  {
+    // Compute the theta ratio for each row and find the minimum
+    double entry, theta;
+    if ((entry = tableau[i][pivotcol]) > 0 &&
+        (theta = tableau[i][n] / entry) < theta_min)
+    {
+      theta_min = theta;
+      pivotrow = i;
+    }
+  }
+
+  // No theta min was found
+  if (theta_min == numeric_limits<double>::infinity())
+    return -1;
+
+  // Update the basis
+  basis[pivotrow] = pivotcol;
+
+  return pivotrow;
+}
+
+void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
+{
+  double pivot = A[pivotrow][pivotcol];
+  size_t m = A.size(), n = A[0].size();
+
+  // Divide the pivot row by the pivot
+  for (size_t j = 0; j < n; j++)
+  {
+    A[pivotrow][j] /= pivot;
+  }
+
+  // Subtract other rows from the pivot row
+  for (size_t i = 0; i < m; i++)
+  {
+    if (i == pivotrow)
+      continue;
+
+    double multiplier = A[i][pivotcol];
+    for (size_t j = 0; j < n; j++)
+    {
+      A[i][j] -= multiplier * A[pivotrow][j];
+    }
+  }
+}
+
+vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const vector<size_t> &basis)
+{
+  size_t n = tableau[0].size() - 1;
+  vector<double> solution(n);
+
+  for (size_t i = 0; i < n; i++)
+  {
+    auto it = find(basis.begin(), basis.end(), i);
+    if (it != basis.end())
+    {
+      size_t pos = distance(basis.begin(), it);
+      solution[i] = tableau[pos][n];
+    }
+  }
+
+  return solution;
+}
+
+pair<double, vector<double>> simplex(
+    const vector<vector<double>> &A,
+    const vector<double> &b,
+    const vector<double> &c,
+    vector<size_t> &basis,
+    double z0)
+{
+  // Initial tableau.
+  auto tableau = create_tableau(A, b, c, z0);
+
+  size_t m = A.size(), n = c.size();
+  ssize_t pivotcol;
+
+  // Repeat as long as there are negative coefficients in the objective row
+  while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) != -1)
+  {
+    ssize_t pivotrow = update_basis(tableau, pivotcol, basis);
+    if (pivotrow == -1)
+    {
+      // The problem is unbounded.
+      return make_pair(-numeric_limits<double>::infinity(), vector<double>{});
+    }
+
+    pivot(tableau, pivotrow, pivotcol);
+  }
+
+  auto solution = get_tableau_solution(tableau, basis);
+
+  return make_pair(-tableau[m][n], solution);
 }
