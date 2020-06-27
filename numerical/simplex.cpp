@@ -230,13 +230,15 @@ vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const
   size_t n = tableau[0].size() - 1;
   vector<double> solution(n);
 
+  // Find the values of basic variables in the tableau
+  // (nonbasic variables are set to 0)
   for (size_t i = 0; i < n; i++)
   {
     auto it = find(basis.begin(), basis.end(), i);
     if (it != basis.end())
     {
-      size_t pos = distance(basis.begin(), it);
-      solution[i] = tableau[pos][n];
+      size_t row = distance(basis.begin(), it);
+      solution[i] = tableau[row][n];
     }
   }
 
