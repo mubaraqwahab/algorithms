@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
+#include <utility>
 
 using namespace std;
 
@@ -29,11 +30,10 @@ ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const
  * - c, an n-dimensional (row) vector of coefficients of the objective function.
  * - z0, the negative of the value of the objective function z.
  */
-vector<vector<double>> create_tableau(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    const vector<double> &c,
-    double z0)
+vector<vector<double>> create_tableau(const vector<vector<double>> &A,
+                                      const vector<double> &b,
+                                      const vector<double> &c,
+                                      double z0)
 {
   size_t m = A.size();
 
@@ -127,6 +127,24 @@ void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
   }
 }
 
+vector<double> get_tableau_solution(const vector<vector<double>> &tableau, const vector<size_t> &basis)
+{
+  size_t n = tableau[0].size() - 1;
+  vector<double> solution(n);
+
+  for (size_t i = 0; i < n; i++)
+  {
+    auto it = find(basis.begin(), basis.end(), i);
+    if (it != basis.end())
+    {
+      size_t pos = distance(basis.begin(), it);
+      solution[i] = tableau[pos][n];
+    }
+  }
+
+  return solution;
+}
+
 /**
  * Solve a linear programming (LP) problem in canonical form using the Simplex method.
  *
@@ -138,16 +156,17 @@ void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
  * - z0, the negative of an initial value of the objective function z.
  *
  * Output:
- * - If the LP problem has an optimal solution, an optimal solution is returned.
- *   The basis parameter is also modified to be the basis at that solution.
- * - Otherwise if the problem is unbounded
+ * - If the LP problem has an optimal solution, a pair (z, p) is returned,
+ *    where p (a vector) is an optimal solution and
+ *    z is the value of the objective function at that point.
+ *    The basis parameter is also modified to be the basis at that solution.
+ * - If the problem is unbounded, a pair (-∞, q), where q is an empty vector, is returned.
  */
-double simplex(
-    const vector<vector<double>> &A,
-    const vector<double> &b,
-    const vector<double> &c,
-    vector<size_t> &basis,
-    double z0)
+pair<double, vector<double>> simplex(const vector<vector<double>> &A,
+                                     const vector<double> &b,
+                                     const vector<double> &c,
+                                     vector<size_t> &basis,
+                                     double z0)
 {
   // Initial tableau.
   auto tableau = create_tableau(A, b, c, z0);
@@ -162,13 +181,15 @@ double simplex(
     if (pivotrow == -1)
     {
       // The problem is unbounded.
-      return -numeric_limits<double>::infinity();
+      return make_pair(-numeric_limits<double>::infinity(), vector<double>{});
     }
 
     pivot(tableau, pivotrow, pivotcol);
   }
 
-  return -tableau[m][n];
+  vector<double> solution = get_tableau_solution(tableau, basis);
+
+  return make_pair(-tableau[m][n], solution);
 }
 
 /* TESTS */
@@ -199,14 +220,24 @@ int main()
   double z0 = 60;
 
   // TEST simplex
-  cout << "Solution: z = " << simplex(A, b, c, basis, z0) << endl;
-  cout << "The basic variables are: ";
-  size_t i = 0;
-  for (; i < basis.size() - 2; i++)
+  double z;
+  vector<double> solution;
+  tie(z, solution) = simplex(A, b, c, basis, z0);
+
+  if (z != -numeric_limits<double>::infinity())
   {
-    cout << "x" << basis[i] << ", ";
+    cout << "Solution: z has an optimum value of " << z << " at (";
+    size_t i = 0;
+    for (; i < solution.size() - 1; i++)
+    {
+      cout << setprecision(4) << solution[i] << ", ";
+    }
+    cout << setprecision(4) << solution[i] << ")." << endl;
   }
-  cout << "x" << basis[i] << " and x" << basis[i + 1] << "." << endl;
+  else
+  {
+    cout << "The LP problem is unbounded below." << endl;
+  }
 
   // TEST create tableau
   // auto tableau = create_tableau(A, b, c, z0);
