@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include <limits>
+#include <utility> // pair
 #include "simplex-helpers.h"
 
 using namespace std;
@@ -117,12 +118,12 @@ pair<double, vector<double>> simplex(const vector<vector<double>> &A,
   auto tableau = create_tableau(A, b, c, z0);
 
   size_t m = A.size(), n = c.size();
-  ssize_t pivotcol;
+  ptrdiff_t pivotcol;
 
   // Repeat as long as there are negative coefficients in the objective row
   while ((pivotcol = mostnegative(tableau[m].begin(), tableau[m].end() - 1)) != -1)
   {
-    ssize_t pivotrow = find_pivot_row(tableau, pivotcol);
+    ptrdiff_t pivotrow = find_pivot_row(tableau, pivotcol);
     if (pivotrow == -1)
     {
       // The problem is unbounded.

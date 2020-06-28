@@ -1,11 +1,10 @@
-#include <algorithm>
 #include <vector>
-#include <limits>
-#include <utility>
+#include <algorithm> // find, min_element
+#include <limits>    // infinity
 
 using namespace std;
 
-ssize_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
+ptrdiff_t mostnegative(vector<double>::const_iterator start, vector<double>::const_iterator stop)
 {
   auto smallest = min_element(start, stop);
   return (*smallest < 0) ? distance(start, smallest) : -1;
@@ -32,7 +31,7 @@ vector<vector<double>> create_tableau(const vector<vector<double>> &A,
   return tableau;
 }
 
-ssize_t find_pivot_row(const vector<vector<double>> &tableau, size_t pivotcol)
+ptrdiff_t find_pivot_row(const vector<vector<double>> &tableau, size_t pivotcol)
 {
   size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
 

@@ -1,5 +1,5 @@
 #include <vector>
-#include <sys/types.h>
+
 /**
  * Returns the index of the most-negative number in a nonempty list (vector).
  * If there's no negative number, -1 is returned.
@@ -8,7 +8,7 @@
  * - start, an iterator to the start of the list
  * - stop, an iterator to the element past-the-end of the list
  */
-ssize_t mostnegative(std::vector<double>::const_iterator start, std::vector<double>::const_iterator stop);
+std::ptrdiff_t mostnegative(std::vector<double>::const_iterator start, std::vector<double>::const_iterator stop);
 
 /**
  * Create a simplex tableau.
@@ -35,7 +35,7 @@ std::vector<std::vector<double>> create_tableau(const std::vector<std::vector<do
  * - If there are no positive entries in pivot column, return -1.
  * - Otherwise, return the index of the pivot row.
  */
-ssize_t find_pivot_row(const std::vector<std::vector<double>> &tableau, std::size_t pivotcol);
+std::ptrdiff_t find_pivot_row(const std::vector<std::vector<double>> &tableau, std::size_t pivotcol);
 
 /**
  * Pivots a matrix.
