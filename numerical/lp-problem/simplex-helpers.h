@@ -25,6 +25,15 @@ std::vector<std::vector<double>> create_tableau(const std::vector<std::vector<do
                                                 double z0);
 
 /**
+ * Compute the theta ratio of a tableau row.
+ *
+ * Params: a tableau row and the index of a pivot column.
+ *
+ * Output: the theta ratio (>=0) of the row. If the ratio < 0, -1 is returned.
+ */
+double theta_ratio(const std::vector<double> &tableaurow, std::size_t pivotcol);
+
+/**
  * Determine the pivot row of a simplex tableau.
  *
  * Params:

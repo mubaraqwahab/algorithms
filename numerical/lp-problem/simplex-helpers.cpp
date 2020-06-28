@@ -31,23 +31,36 @@ vector<vector<double>> create_tableau(const vector<vector<double>> &A,
   return tableau;
 }
 
+double theta_ratio(const vector<double> &tableaurow, size_t pivotcol)
+{
+  double entry;
+
+  // Find the ratio only for a nonnegative entry
+  if ((entry = tableaurow[pivotcol]) > 0)
+  {
+    size_t n = tableaurow.size() - 1;
+    return tableaurow[n] / entry;
+  }
+
+  return -1;
+}
+
 ptrdiff_t find_pivot_row(const vector<vector<double>> &tableau, size_t pivotcol)
 {
-  size_t m = tableau.size() - 1, n = tableau[0].size() - 1;
-
-  // Find the pivot row (and thus, the departing variable)
+  size_t m = tableau.size() - 1;
   size_t pivotrow;
+
+  // Compute the theta ratio for each row and find the minimum
   double theta_min = numeric_limits<double>::infinity();
   for (size_t i = 0; i < m; i++)
   {
-    // Compute the theta ratio for each row and find the minimum
-    double entry, theta;
-    if ((entry = tableau[i][pivotcol]) > 0 &&
-        (theta = tableau[i][n] / entry) < theta_min)
-    {
-      theta_min = theta;
-      pivotrow = i;
-    }
+    double theta = theta_ratio(tableau[i], pivotcol);
+
+    if (theta < 0 || theta >= theta_min)
+      continue;
+
+    theta_min = theta;
+    pivotrow = i;
   }
 
   // No theta min was found
