@@ -18,4 +18,4 @@ __pycache__/
 TODO
 report.*.json
 img/
-numerical/README.md
+numerical/**/README.md
