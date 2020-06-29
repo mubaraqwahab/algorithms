@@ -77,12 +77,16 @@ int main()
 
 void test_mostnegative(const vector<double> &v)
 {
-  int mostnegativepos = mostnegative(v.begin(), v.end());
-
   cout << "\nMOST NEGATIVE TEST" << endl;
   cout << "Given ";
   print_array(v, false);
-  cout << ". The most negative number is at index " << mostnegativepos << endl;
+  cout << ". ";
+
+  int mostnegativepos = mostnegative(v.begin(), v.end());
+  if (mostnegativepos == -1)
+    cout << "There's no negative number" << endl;
+  else
+    cout << "The most negative number is at index " << mostnegativepos << endl;
 }
 
 vector<vector<double>> test_createtableau(
