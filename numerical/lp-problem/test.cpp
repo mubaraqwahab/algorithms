@@ -139,11 +139,11 @@ void print_array(const vector<double> &arr, bool newline)
 {
   size_t i = 0;
   cout << "(";
+
   for (; i < arr.size() - 1; i++)
-  {
     cout << setprecision(PRECISION) << arr[i] << ", ";
-  }
   cout << setprecision(PRECISION) << arr[i] << ")";
+
   if (newline)
     cout << endl;
 }
@@ -151,16 +151,12 @@ void print_array(const vector<double> &arr, bool newline)
 void print_row(const vector<double> &v)
 {
   for (double e : v)
-  {
     cout << setw(10) << setprecision(PRECISION) << e;
-  }
   cout << endl;
 }
 
 void print_table(const vector<vector<double>> &A)
 {
   for (const auto &row : A)
-  {
     print_row(row);
-  }
 }
