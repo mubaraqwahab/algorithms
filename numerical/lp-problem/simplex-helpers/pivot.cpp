@@ -27,3 +27,4 @@ void pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
       A[i][j] -= multiplier * A[pivotrow][j];
     }
   }
+}

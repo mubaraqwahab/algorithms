@@ -1,4 +1,4 @@
-simplex: % : %.cpp %-helpers.cpp
+simplex: test.cpp simplex.cpp simplex-helpers/*.cpp
 	g++ -Wall $^ -o $@
 
 .PHONY: clean
