@@ -27,9 +27,9 @@ struct point
 double green(vector<point> V)
 {
   double area = 0;
-  size_t n = V.size();
+  int n = V.size();
 
-  for (size_t i = 0, j; i < n; i++)
+  for (int i = 0, j; i < n; i++)
   {
     j = (i + 1) % n;
     area += 0.5 * (V[j].x + V[i].x) * (V[j].y - V[i].y);
@@ -53,7 +53,7 @@ double crossproduct(vector<point> V)
 
   // displacement vector V1 - V0
   point u1 = V[1] - V[0], u2;
-  for (size_t i = 2; i < V.size(); i++)
+  for (int i = 2; i < V.size(); i++)
   {
     // displacement vector Vi - V0
     u2 = V[i] - V[0];
@@ -73,7 +73,7 @@ int main()
 
   // Print the polygon
   cout << "Polygon: { ";
-  for (size_t i = 0; i < V.size(); i++)
+  for (int i = 0; i < V.size(); i++)
   {
     cout << "(" << V[i].x << ", " << V[i].y << ")";
     if (i < V.size() - 1)

@@ -1,5 +1,5 @@
 simplex: test.cpp simplex.cpp simplex-helpers/*.cpp
-	g++ -Wall $^ -o $@
+	g++ -Wall -Wno-sign-compare $^ -o $@
 
 .PHONY: clean
 clean:

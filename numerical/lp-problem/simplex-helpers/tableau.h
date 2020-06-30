@@ -22,7 +22,7 @@ std::vector<std::vector<double>> create_tableau(
  *
  * Output: the theta ratio (>=0) of the row. If the ratio < 0, -1 is returned.
  */
-double theta_ratio(const std::vector<double> &tableaurow, std::size_t pivotcol);
+double theta_ratio(const std::vector<double> &tableaurow, int pivotcol);
 
 /**
  * Determine the pivot row of a simplex tableau.
@@ -35,11 +35,11 @@ double theta_ratio(const std::vector<double> &tableaurow, std::size_t pivotcol);
  * - If there are no positive entries in pivot column, return -1.
  * - Otherwise, return the index of the pivot row.
  */
-std::ptrdiff_t find_pivot_row(const std::vector<std::vector<double>> &tableau, std::size_t pivotcol);
+int find_pivot_row(const std::vector<std::vector<double>> &tableau, int pivotcol);
 
 /**
  * Given a simplex tableau and its basis, return (a vector of) the basic solution.
  */
 std::vector<double> get_tableau_solution(
     const std::vector<std::vector<double>> &tableau,
-    const std::vector<std::size_t> &basis);
+    const std::vector<int> &basis);

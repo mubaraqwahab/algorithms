@@ -8,6 +8,6 @@
  * - start, an iterator to the start of the list
  * - stop, an iterator to the element past-the-end of the list
  */
-std::ptrdiff_t mostnegative(
+int mostnegative(
     std::vector<double>::const_iterator start,
     std::vector<double>::const_iterator stop);

@@ -15,11 +15,11 @@ using namespace std;
  *
  * Ouput: An approximation to the solution to x=g(x).
  */
-double fixedpoint(double g(double), double p0, double tol, size_t max_iter)
+double fixedpoint(double g(double), double p0, double tol, int max_iter)
 {
   double p;
 
-  for (size_t i = 0; i < max_iter; i++)
+  for (int i = 0; i < max_iter; i++)
   {
     p = g(p0);
 
@@ -43,7 +43,7 @@ int main()
   // Test
   double p0 = 1;
   double tol = 1e-2;
-  size_t max_iter = 20;
+  int max_iter = 20;
 
   cout << "Solve x = (3x^2 + 3)^(1/4) correct to within 1e-2 using fixed-point iteration:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)

@@ -16,11 +16,11 @@ using namespace std;
  *
  * Ouput: An approximation to the root of f(x)=0.
  */
-double newtonraphson(double f(double), double g(double), double z0, double tol, size_t max_iter)
+double newtonraphson(double f(double), double g(double), double z0, double tol, int max_iter)
 {
   double z;
 
-  for (size_t i = 0; i < max_iter; i++)
+  for (int i = 0; i < max_iter; i++)
   {
     z = z0 - (f(z0) / g(z0));
 
@@ -50,7 +50,7 @@ int main()
   // Test
   double z0 = 1.5;
   double tol = 1e-4;
-  size_t max_iter = 20;
+  int max_iter = 20;
 
   cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using Newton-Raphson method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)

@@ -10,4 +10,4 @@
  *
  * Output: matrix A reduced to canonical form. (Nothing is returned.)
  */
-void pivot(std::vector<std::vector<double>> &A, std::size_t pivotrow, std::size_t pivotcol);
+void pivot(std::vector<std::vector<double>> &A, int pivotrow, int pivotcol);

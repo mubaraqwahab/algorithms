@@ -22,5 +22,5 @@ std::pair<double, std::vector<double>> simplex(
     const std::vector<std::vector<double>> &A,
     const std::vector<double> &b,
     const std::vector<double> &c,
-    std::vector<std::size_t> &basis,
+    std::vector<int> &basis,
     double z0);

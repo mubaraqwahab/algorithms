@@ -15,11 +15,11 @@ using namespace std;
  *
  * Ouput: An approximation to the root of f(x)=0 on [a,b].
  */
-double bisection(double f(double), double a, double b, double tol, size_t max_iter)
+double bisection(double f(double), double a, double b, double tol, int max_iter)
 {
   double c, ya = f(a), yb = f(b), yc;
 
-  for (size_t i = 0; i < max_iter; i++)
+  for (int i = 0; i < max_iter; i++)
   {
     c = (a + b) / 2;
     yc = f(c);
@@ -55,7 +55,7 @@ int main()
   // Test
   double a = 0, b = 2;
   double tol = 1e-2;
-  size_t max_iter = 20;
+  int max_iter = 20;
 
   cout << "Solve ln(x+1) - cos(x) = 0 on [0,2] correct to within 1e-2 using the bisection method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)

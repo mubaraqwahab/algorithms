@@ -21,17 +21,17 @@ vector<double> gaussseidel(
     const vector<vector<double>> &A,
     const vector<double> &b,
     vector<double> x0,
-    double tol, size_t max_iter)
+    double tol, int max_iter)
 {
   vector<double> x{x0};
-  size_t n = x.size();
+  int n = x.size();
 
-  for (size_t k = 0; k < max_iter; k++)
+  for (int k = 0; k < max_iter; k++)
   {
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
       x[i] = b[i];
-      for (size_t j = 0; j < n; j++)
+      for (int j = 0; j < n; j++)
       {
         if (i == j)
           continue;
@@ -59,7 +59,7 @@ int main()
 
   vector<double> x0{0, 0, 0, 0};
   double tol = 1e-2;
-  size_t max_iter = 10;
+  int max_iter = 10;
 
   vector<double> x = gaussseidel(A, b, x0, tol, max_iter);
 

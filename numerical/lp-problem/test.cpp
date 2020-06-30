@@ -21,13 +21,13 @@ vector<vector<double>> test_createtableau(
     const vector<double> &c,
     double z0);
 
-void test_pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol);
+void test_pivot(vector<vector<double>> &A, int pivotrow, int pivotcol);
 
 void test_simplex(
     const vector<vector<double>> &A,
     const vector<double> &b,
     const vector<double> &c,
-    vector<size_t> &basis,
+    vector<int> &basis,
     double z0);
 
 void print_array(const vector<double> &arr, bool newline);
@@ -52,7 +52,7 @@ int main()
   // Coefficients of objective function z
   vector<double> c{-700, -750, -550, 0, 0, 0};
   // Indices of basic variables
-  vector<size_t> basis{3, 4, 5};
+  vector<int> basis{3, 4, 5};
   // Negative of the value z at the basis
   double z0 = 0;
 
@@ -102,7 +102,7 @@ vector<vector<double>> test_createtableau(
   return tableau;
 }
 
-void test_pivot(vector<vector<double>> &A, size_t pivotrow, size_t pivotcol)
+void test_pivot(vector<vector<double>> &A, int pivotrow, int pivotcol)
 {
   cout << "\nPIVOT TEST" << endl;
   cout << "Before pivot:" << endl;
@@ -116,7 +116,7 @@ void test_simplex(
     const vector<vector<double>> &A,
     const vector<double> &b,
     const vector<double> &c,
-    vector<size_t> &basis,
+    vector<int> &basis,
     double z0)
 {
   double z;
@@ -137,7 +137,7 @@ void test_simplex(
 
 void print_array(const vector<double> &arr, bool newline)
 {
-  size_t i = 0;
+  int i = 0;
   cout << "(";
 
   for (; i < arr.size() - 1; i++)

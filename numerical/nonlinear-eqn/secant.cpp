@@ -15,11 +15,11 @@ using namespace std;
  *
  * Ouput: An approximation to the root of f(x)=0.
  */
-double secant(double f(double), double z0, double z1, double tol, size_t max_iter)
+double secant(double f(double), double z0, double z1, double tol, int max_iter)
 {
   double z2, y0 = f(z0), y1;
 
-  for (size_t i = 0; i < max_iter; i++)
+  for (int i = 0; i < max_iter; i++)
   {
     y1 = f(z1);
     z2 = (y1 * z0 - y0 * z1) / (y1 - y0);
@@ -46,7 +46,7 @@ int main()
   // Test
   double z0 = 1.5, z1 = 1.6;
   double tol = 1e-4;
-  size_t max_iter = 20;
+  int max_iter = 20;
 
   cout << "Solve x^3 + 2x^2 - 5 = 0 on [1,2] correct to within 1e-4 using secant method:" << endl;
   cout << "Solution: x = " << setiosflags(ios::fixed) << setprecision(6)

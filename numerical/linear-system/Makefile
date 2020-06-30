@@ -1,10 +1,11 @@
 executables = jacobi gaussseidel
+flags = -Wall -Wno-sign-compare
 
 $(executables): % : %.cpp norm.o
-	g++ -Wall $^ -o $@
+	g++ $(flags) $^ -o $@
 
 norm.o:
-	g++ -Wall -c norm.cpp
+	g++ $(flags) -c norm.cpp
 
 .PHONY: clean
 clean:
