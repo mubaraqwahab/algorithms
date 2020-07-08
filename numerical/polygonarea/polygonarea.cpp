@@ -19,7 +19,9 @@ struct point
  * Compute the area of an arbitrary polygon using Green's theorem
  *
  * Params:
- * - an array V of n (n>=3) vertices of the polygon, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
+ * - an array V of n (n>=3) vertices of the polygon,
+ *    where each vertex is a position vector (x,y) in the Cartesian plane.
+ *    The vertices should be ordered as they "appear" in the polygon.
  *
  * Output:
  * - The area of the polygon
@@ -42,7 +44,9 @@ double green(vector<point> V)
  * Compute the area of an arbitrary polygon by exploiting the cross product formula
  *
  * Params:
- * - an array V of n (n>=3) vertices of the polygon, where each vertex is a position vector (x,y) in the Cartesian plane. The vertices should be ordered as they "appear" in the polygon.
+ * - an array V of n (n>=3) vertices of the polygon,
+ *    where each vertex is a position vector (x,y) in the Cartesian plane.
+ *    The vertices should be ordered as they "appear" in the polygon.
  *
  * Output:
  * - The area of the polygon
