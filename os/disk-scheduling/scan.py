@@ -23,12 +23,9 @@ def SCAN(requests: list, head: int):
         head_movements += abs(req - head)
         head = req
 
+    # Don't modify the original
     requests = requests[:]
     requests.sort()
-
-    print()
-    print(requests)
-    print()
 
     # Find the index of the next request to the head (towards the left)
     first = largest_int_smaller_than(requests, head)
