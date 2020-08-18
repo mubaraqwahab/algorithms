@@ -2,12 +2,13 @@ import { max } from './minmax.js';
 
 /**
  * A binary tree.
- * @typedef {{} | { root, left: BinaryTree, right: BinaryTree }} BinaryTree
+ * @template T
+ * @typedef {{} | { root: T, left: BinaryTree<T>, right: BinaryTree<T> }} BinaryTree
  */
 
 /**
  * Compute the height of a binary tree.
- * @param {BinaryTree} binTree
+ * @param {BinaryTree<T>} binTree
  */
 export function height(binTree) {
   // Return -1 if it has no root (i.e. if it's empty)
@@ -20,7 +21,7 @@ export function height(binTree) {
 
 /**
  * Traverse a binary tree in the preorder manner.
- * @param {BinaryTree} binTree
+ * @param {BinaryTree<T>} binTree
  * @returns {Array<T>} The traversal path
  */
 export function preorder(binTree) {
@@ -35,7 +36,7 @@ export function preorder(binTree) {
 
 /**
  * Traverse a binary tree in the inorder manner.
- * @param {BinaryTree} binTree
+ * @param {BinaryTree<T>} binTree
  * @returns {Array<T>} The traversal path
  */
 export function inorder(binTree) {
@@ -50,7 +51,7 @@ export function inorder(binTree) {
 
 /**
  * Traverse a binary tree in the postorder manner.
- * @param {BinaryTree} binTree
+ * @param {BinaryTree<T>} binTree
  * @returns {Array<T>} The traversal path
  */
 export function postorder(binTree) {

@@ -1,6 +1,6 @@
 /**
  * Find the distance between the closest pair of Cartesian points (x,y) in `points` by brute force.
- * @param {Array<{ x, y }>} points - An array of n (n >= 2) points
+ * @param {Array<{ x: number, y: number }>} points - An array of n (n >= 2) points
  */
 export function bruteForceClosestPair(points) {
   let d = Number.POSITIVE_INFINITY;

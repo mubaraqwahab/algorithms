@@ -1,6 +1,6 @@
 /**
  * Sort an array by selection sort.
- * @param {array} array - An array to sort.
+ * @param {Array<T>} array - An array to sort.
  * @param {function(T,T): number} compare - A comparison function.
  * When called with any two values `a` and `b` of an array,
  * if it returns a positive number, then `b` precedes `a` in the sorted array.

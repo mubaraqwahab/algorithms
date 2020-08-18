@@ -2,10 +2,10 @@
 
 /**
  * Return the median value of `a`, `b` and `c`.
- * @param {any} a
- * @param {any} b
- * @param {any} c
- * @param {function(any, any): number} compare A comparison function.
+ * @param {T} a
+ * @param {T} b
+ * @param {T} c
+ * @param {function(T, T): number} compare A comparison function.
  * When called with `a` and `b`, if it returns a positive number, then `a` is considered larger than `b`
  * Otherwise `a` is considered smaller than `b`.
  */
