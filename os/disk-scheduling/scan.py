@@ -28,7 +28,7 @@ def SCAN(requests: list, head: int):
     requests.sort()
 
     # Find the index of the next request to the head (towards the left)
-    first = largest_int_smaller_than(requests, head)
+    first = max_with_limit(requests, head)
 
     # Start servicing until you reach the leftmost request
     for i in range(first, -1, -1):
@@ -43,8 +43,8 @@ def SCAN(requests: list, head: int):
 
     return head_movements, head_traversal
 
-def largest_int_smaller_than(integers: list, limit: int):
-    """Return the index of the largest integer in a sorted list greater than a limit."""
+def max_with_limit(integers: list, limit: int):
+    """Return the index of the largest integer in a sorted list not greater than a limit."""
 
     result = -1
     for i in range(len(integers)):
